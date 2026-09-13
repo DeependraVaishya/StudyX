@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Tutor | StudyX</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="dashboard-page">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <a href="dashboard.html" class="logo">
+            <span class="logo-icon">✦</span>
+            <span>Study<span>X</span></span>
+        </a>
+<nav class="sidebar-nav">
+
+    <a href="dashboard.html" class="nav-item">
+        <span>🏠</span>
+        <span>Dashboard</span>
+    </a>
+
+    <a href="ai-tutor.html" class="nav-item active">
+        <span>🤖</span>
+        <span>AI Tutor</span>
+    </a>
+
+    <a href="study-materials.html" class="nav-item">
+        <span>📚</span>
+        <span>Study Materials</span>
+    </a>
+
+    <a href="quiz.html" class="nav-item">
+        <span>📝</span>
+        <span>Quiz Generator</span>
+    </a>
+    
+
+    <a href="study-planner.html" class="nav-item">
+        <span>📅</span>
+        <span>Study Planner</span>
+    </a>
+
+    <a href="progress.html" class="nav-item">
+        <span>📊</span>
+        <span>Progress</span>
+    </a>
+
+</nav>
+
+        <div class="sidebar-bottom">
+
+            <a href="#" class="nav-item">
+                <span>⚙</span>
+                Settings
+            </a>
+
+            <button id="logoutBtn" class="logout-btn">
+                <span>↪</span>
+                Logout
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+    <main class="dashboard-main ai-tutor-main">
+
+        <!-- HEADER -->
+        <header class="dashboard-header">
+
+            <div>
+
+                <span class="section-label">
+                    AI LEARNING
+                </span>
+
+                <h1>
+                    AI Tutor
+                </h1>
+
+                <p>
+                    Ask questions, understand concepts and learn smarter.
+                </p>
+
+            </div>
+
+            <div class="user-profile">
+
+                <div class="profile-avatar" id="userAvatar">
+                    S
+                </div>
+
+                <div>
+
+                    <strong id="profileName">
+                        Student
+                    </strong>
+
+                    <small id="profileEmail">
+                        student@example.com
+                    </small>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- AI CHAT -->
+        <section class="ai-tutor-container">
+
+            <!-- CHAT HEADER -->
+            <div class="chat-header">
+
+                <div class="chat-ai-info">
+
+                    <div class="chat-ai-icon">
+                        ✦
+                    </div>
+
+                    <div>
+
+                        <h2>
+                            StudyX AI
+                        </h2>
+
+                        <span>
+                            ● Online
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <button
+                    class="new-chat-btn"
+                    id="newChatBtn"
+                >
+                    + New Chat
+                </button>
+
+            </div>
+
+
+            <!-- MESSAGES -->
+            <div
+                class="chat-messages"
+                id="chatMessages"
+            >
+
+            </div>
+
+
+            <!-- INPUT -->
+            <div class="chat-input-area">
+
+                <div class="chat-input-wrapper">
+
+                    <textarea
+                        id="chatInput"
+                        placeholder="Ask StudyX AI anything..."
+                        rows="1"
+                    ></textarea>
+
+                    <button
+                        id="sendMessageBtn"
+                        class="send-message-btn"
+                    >
+                        ↑
+                    </button>
+
+                </div>
+
+                <div class="input-footer">
+
+                    <span>
+                        StudyX AI can make mistakes. Verify important information.
+                    </span>
+
+                    <span>
+                        Enter ↵ to send
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+   <script>
+const API_URL = "http://127.0.0.1:8000";
+
+// ================= USER =================
+let user = null;
+try {
+    user = JSON.parse(localStorage.getItem("studyxUser"));
+} catch (e) {
+    user = null;
+}
+
+if (!user || !user.email) {
+    window.location.href = "login.html";
+    throw new Error("User is not logged in.");
+}
+
+// Show logged-in user
+const profileName = document.getElementById("profileName");
+const profileEmail = document.getElementById("profileEmail");
+const userAvatar = document.getElementById("userAvatar");
+
+if (profileName) profileName.textContent = user.name || "Student";
+if (profileEmail) profileEmail.textContent = user.email;
+if (userAvatar) userAvatar.textContent = (user.name || "S").charAt(0).toUpperCase();
+
+// ================= ELEMENTS =================
+const chatInput = document.getElementById("chatInput");
+const chatContainer = document.getElementById("chatMessages");
+const sendButton = document.getElementById("sendMessageBtn");
+const newChatButton = document.getElementById("newChatBtn");
+
+const historyKey = "studyxChatHistory_" + user.email;
+let chatHistory = JSON.parse(localStorage.getItem(historyKey) || "[]");
+let isThinking = false;
+
+// ================= HELPERS =================
+function escapeHTML(text) {
+    const div = document.createElement("div");
+    div.textContent = String(text ?? "");
+    return div.innerHTML;
+}
+
+function saveChat() {
+    localStorage.setItem(historyKey, JSON.stringify(chatHistory));
+}
+
+function scrollChat() {
+    if (chatContainer) chatContainer.scrollTop = chatContainer.scrollHeight;
+}
+
+function addMessage(text, type = "ai", save = false) {
+    if (!chatContainer) return null;
+
+    const message = document.createElement("div");
+    message.className = type === "user" ? "message user-message" : "message ai-message";
+    message.innerHTML = `
+        <div class="message-content">
+            ${escapeHTML(text).replace(/\n/g, "<br>")}
+        </div>
+    `;
+    chatContainer.appendChild(message);
+    scrollChat();
+
+    if (save) {
+        chatHistory.push({ type, text });
+        saveChat();
+    }
+
+    return message;
+}
+
+function showWelcome() {
+    if (!chatContainer || chatContainer.children.length) return;
+
+    const box = document.createElement("div");
+    box.className = "studyx-welcome";
+    box.innerHTML = `
+        <div class="welcome-icon">✦</div>
+        <h2>How can I help you study?</h2>
+        <p>Ask StudyX AI a question, explain a concept, or learn from your uploaded PDFs.</p>
+        <div class="quick-prompts">
+            <button type="button" data-prompt="Explain this topic in simple words">Explain simply</button>
+            <button type="button" data-prompt="Give me a real-world example of this topic">Give an example</button>
+            <button type="button" data-prompt="Create 5 quiz questions about this topic">Make a quiz</button>
+            <button type="button" data-prompt="Explain this topic in detail with important points">Explain in detail</button>
+        </div>
+    `;
+    chatContainer.appendChild(box);
+
+    box.querySelectorAll("[data-prompt]").forEach(button => {
+        button.addEventListener("click", () => {
+            chatInput.value = button.dataset.prompt;
+            chatInput.focus();
+        });
+    });
+}
+
+function removeWelcome() {
+    const welcome = chatContainer?.querySelector(".studyx-welcome");
+    if (welcome) welcome.remove();
+}
+
+function showTyping() {
+    const message = document.createElement("div");
+    message.className = "message ai-message typing-message";
+    message.innerHTML = `
+        <div class="message-content">
+            <span class="typing-dot">●</span>
+            <span class="typing-dot">●</span>
+            <span class="typing-dot">●</span>
+            <span style="margin-left:8px;opacity:.65">StudyX AI is thinking...</span>
+        </div>
+    `;
+    chatContainer.appendChild(message);
+    scrollChat();
+    return message;
+}
+
+function showSources(sources) {
+    if (!sources || !sources.length) return;
+
+    const names = [...new Set(sources.map(s => s.filename).filter(Boolean))];
+    if (!names.length) return;
+
+    const source = document.createElement("div");
+    source.className = "message ai-message source-message";
+    source.innerHTML = `<div class="message-content">📚 <strong>Source:</strong> ${escapeHTML(names.join(", "))}</div>`;
+    chatContainer.appendChild(source);
+    scrollChat();
+}
+
+// ================= AI REQUEST =================
+async function askAI(question) {
+    const response = await fetch(`${API_URL}/ai/chat`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            message: question,
+            email: user.email
+        })
+    });
+
+    let data = {};
+    try { data = await response.json(); } catch (e) {}
+
+    if (!response.ok) {
+        throw new Error(data.detail || "AI request failed.");
+    }
+
+    return data;
+}
+
+// ================= SEND =================
+async function sendQuestion() {
+    if (!chatInput || !sendButton || isThinking) return;
+
+    const question = chatInput.value.trim();
+    if (!question) return;
+
+    isThinking = true;
+    removeWelcome();
+
+    addMessage(question, "user", true);
+    chatInput.value = "";
+    chatInput.style.height = "auto";
+    sendButton.disabled = true;
+    sendButton.style.opacity = ".55";
+
+    const typing = showTyping();
+
+    try {
+        const data = await askAI(question);
+        if (typing) typing.remove();
+
+        const answer = data.answer || "Sorry, I couldn't generate an answer.";
+        addMessage(answer, "ai", true);
+        showSources(data.mode === "rag" ? data.sources : []);
+    } catch (error) {
+        console.error("StudyX AI Error:", error);
+        if (typing) typing.remove();
+        addMessage("❌ AI se connection nahi ho paaya. Please make sure the StudyX backend and Ollama are running.", "ai");
+    } finally {
+        isThinking = false;
+        sendButton.disabled = false;
+        sendButton.style.opacity = "1";
+        chatInput.focus();
+        scrollChat();
+    }
+}
+
+// ================= BUTTON =================
+if (sendButton) {
+    sendButton.addEventListener("click", function(e) {
+        e.preventDefault();
+        sendQuestion();
+    });
+}
+
+// ================= ENTER =================
+if (chatInput) {
+    chatInput.addEventListener("keydown", function(e) {
+        if (e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault();
+            sendQuestion();
+        }
+    });
+
+    chatInput.addEventListener("input", function() {
+        this.style.height = "auto";
+        this.style.height = Math.min(this.scrollHeight, 150) + "px";
+    });
+}
+
+// ================= NEW CHAT =================
+if (newChatButton) {
+    newChatButton.addEventListener("click", function() {
+        if (isThinking) return;
+
+        chatHistory = [];
+        localStorage.removeItem(historyKey);
+        chatContainer.innerHTML = "";
+        showWelcome();
+        chatInput.value = "";
+        chatInput.focus();
+    });
+}
+
+// ================= LOGOUT =================
+const logoutButtons = document.querySelectorAll("#logoutBtn, .logout-btn");
+logoutButtons.forEach(button => {
+    button.addEventListener("click", function() {
+        localStorage.removeItem("studyxUser");
+        window.location.href = "login.html";
+    });
+});
+
+// ================= EXTRA UI =================
+const style = document.createElement("style");
+style.textContent = `
+.studyx-welcome{text-align:center;padding:42px 22px;color:#aab0c4}
+.welcome-icon{width:48px;height:48px;margin:0 auto 14px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#7c3aed,#9b7cff);color:white;font-size:22px}
+.studyx-welcome h2{color:#fff;font-size:22px;margin-bottom:7px}
+.studyx-welcome p{max-width:550px;margin:0 auto 20px;font-size:13px}
+.quick-prompts{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
+.quick-prompts button{border:1px solid rgba(255,255,255,.1);background:#11131d;color:#b8bdd0;border-radius:999px;padding:8px 12px;font-size:12px}
+.quick-prompts button:hover{border-color:#8b5cf6;color:#fff}
+.typing-dot{font-size:8px;opacity:.45;animation:studyxBlink 1.1s infinite}
+.typing-dot:nth-child(2){animation-delay:.18s}.typing-dot:nth-child(3){animation-delay:.36s}
+@keyframes studyxBlink{50%{opacity:1}}
+.source-message{opacity:.8;font-size:12px}
+`;
+document.head.appendChild(style);
+
+// ================= LOAD HISTORY =================
+if (chatHistory.length) {
+    chatHistory.forEach(item => addMessage(item.text, item.type, false));
+} else {
+    showWelcome();
+}
+</script>
+</body>
+
+</html>

@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StudyX | AI-Powered Learning</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+    font-family:Inter,Segoe UI,Arial,sans-serif;
+    background:#07080d;
+    color:#f7f7fb;
+    line-height:1.6;
+}
+a{text-decoration:none;color:inherit}
+button{font:inherit;cursor:pointer}
+
+:root{
+    --purple:#8b5cf6;
+    --purple2:#a78bfa;
+    --border:rgba(255,255,255,.09);
+    --muted:#9da3b8;
+    --card:#10121b;
+}
+
+.navbar{
+    position:sticky;top:0;z-index:100;
+    height:76px;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:0 7%;
+    background:rgba(7,8,13,.82);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid var(--border);
+}
+.logo{display:flex;align-items:center;gap:11px;font-size:23px;font-weight:800}
+.logo-icon{
+    width:43px;height:43px;border-radius:12px;
+    display:grid;place-items:center;
+    background:linear-gradient(135deg,#7c3aed,#a78bfa);
+    box-shadow:0 10px 30px rgba(124,58,237,.25);
+}
+.logo span:last-child{color:#a78bfa}
+
+.nav-links{display:flex;gap:32px;align-items:center}
+.nav-links a{color:#aeb4c8;font-size:14px;transition:.2s}
+.nav-links a:hover{color:#fff}
+
+.nav-actions{display:flex;gap:12px;align-items:center}
+.btn{
+    border:1px solid var(--border);
+    border-radius:11px;padding:11px 18px;
+    background:#11131d;color:#fff;
+    transition:.2s;display:inline-flex;align-items:center;justify-content:center;gap:8px;
+}
+.btn:hover{transform:translateY(-2px);border-color:rgba(167,139,250,.45)}
+.btn-primary{
+    background:linear-gradient(135deg,#7c3aed,#9564f5);
+    border:none;box-shadow:0 12px 30px rgba(124,58,237,.25);
+}
+.btn-primary:hover{box-shadow:0 16px 38px rgba(124,58,237,.35)}
+
+.hero{
+    min-height:calc(100vh - 76px);
+    padding:80px 7% 65px;
+    display:grid;grid-template-columns:1.05fr .95fr;
+    gap:60px;align-items:center;
+    position:relative;overflow:hidden;
+}
+.hero:before{
+    content:"";position:absolute;width:500px;height:500px;
+    background:rgba(124,58,237,.13);filter:blur(110px);
+    top:70px;right:5%;pointer-events:none;
+}
+.badge{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:7px 13px;border:1px solid rgba(139,92,246,.35);
+    border-radius:999px;color:#bda8ff;background:rgba(139,92,246,.07);
+    font-size:13px;margin-bottom:22px;
+}
+.badge i{width:6px;height:6px;border-radius:50%;background:#67e8f9}
+h1{
+    font-size:clamp(48px,6vw,78px);
+    line-height:1.02;letter-spacing:-3px;
+    max-width:720px;
+}
+.gradient-text{
+    background:linear-gradient(90deg,#a78bfa,#7c5cff);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero-copy{
+    color:#aab0c4;font-size:17px;max-width:650px;
+    margin:24px 0 30px;
+}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+.stats{display:flex;gap:38px;margin-top:48px;flex-wrap:wrap}
+.stat strong{font-size:24px}
+.stat span{display:block;color:#7f879e;font-size:12px;margin-top:2px}
+
+.ai-preview{
+    position:relative;
+    border:1px solid rgba(167,139,250,.2);
+    background:linear-gradient(145deg,#11131d,#0c0e16);
+    border-radius:24px;padding:18px;
+    box-shadow:0 30px 90px rgba(0,0,0,.45);
+}
+.ai-top{display:flex;align-items:center;justify-content:space-between;padding:5px 4px 17px;border-bottom:1px solid var(--border)}
+.ai-brand{display:flex;align-items:center;gap:10px}
+.ai-icon{
+    width:40px;height:40px;border-radius:11px;
+    display:grid;place-items:center;background:#7c3aed;
+}
+.ai-brand small{display:block;color:#55d6a7;font-size:11px}
+.online{width:7px;height:7px;background:#5eead4;border-radius:50%}
+.chat{padding:22px 5px}
+.msg{padding:13px 16px;border-radius:14px;margin-bottom:14px;font-size:14px;max-width:88%}
+.user-msg{margin-left:auto;background:linear-gradient(135deg,#7c3aed,#8b5cf6)}
+.ai-msg{background:#1a1d28;border:1px solid var(--border);color:#c4c9d9}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 18px}
+.chip{font-size:11px;padding:7px 10px;border:1px solid var(--border);border-radius:999px;color:#aab0c4}
+.chat-input{
+    display:flex;gap:8px;padding:7px 7px 7px 13px;
+    border:1px solid var(--border);border-radius:13px;background:#0c0e15;
+}
+.chat-input input{flex:1;background:none;border:0;outline:0;color:#fff}
+.chat-input button{
+    width:38px;height:38px;border:0;border-radius:10px;
+    background:#8b5cf6;color:#fff;
+}
+
+section{scroll-margin-top:90px}
+.section{padding:90px 7%}
+.section-head{text-align:center;max-width:680px;margin:0 auto 42px}
+.section-head .eyebrow{color:#a78bfa;font-size:12px;font-weight:700;letter-spacing:1.5px}
+.section-head h2{font-size:38px;letter-spacing:-1.2px;margin:8px 0}
+.section-head p{color:var(--muted)}
+
+.features{
+    display:grid;grid-template-columns:repeat(5,1fr);gap:14px;
+}
+.feature{
+    min-height:190px;padding:23px;border:1px solid var(--border);
+    border-radius:18px;background:linear-gradient(145deg,#10121b,#0c0e15);
+    transition:.25s;cursor:pointer;
+}
+.feature:hover{transform:translateY(-6px);border-color:rgba(167,139,250,.3)}
+.feature-icon{font-size:25px;margin-bottom:22px}
+.feature h3{font-size:16px;margin-bottom:7px}
+.feature p{font-size:12px;color:#8f96ab}
+.feature .arrow{display:block;text-align:right;color:#a78bfa;margin-top:15px}
+
+.how-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
+}
+.step{
+    padding:28px;border:1px solid var(--border);border-radius:18px;background:#0e1018;
+}
+.step-num{
+    width:34px;height:34px;border-radius:10px;background:rgba(139,92,246,.15);
+    color:#bda8ff;display:grid;place-items:center;font-weight:700;margin-bottom:18px;
+}
+.step h3{margin-bottom:8px}
+.step p{color:#8f96ab;font-size:14px}
+
+.about-box{
+    max-width:900px;margin:auto;padding:40px;
+    border:1px solid var(--border);border-radius:22px;
+    background:linear-gradient(145deg,#11131d,#0b0d14);
+    text-align:center;
+}
+.about-box p{color:#9da3b8;margin:15px auto 25px;max-width:700px}
+
+footer{
+    padding:28px 7%;border-top:1px solid var(--border);
+    display:flex;justify-content:space-between;gap:20px;
+    color:#72798d;font-size:12px;
+}
+
+@media(max-width:1000px){
+    .hero{grid-template-columns:1fr;padding-top:60px}
+    .features{grid-template-columns:repeat(2,1fr)}
+    .nav-links{display:none}
+}
+@media(max-width:600px){
+    .navbar{padding:0 5%}
+    .nav-actions .btn:first-child{display:none}
+    .hero,.section{padding-left:5%;padding-right:5%}
+    h1{font-size:48px;letter-spacing:-2px}
+    .stats{gap:22px}
+    .features,.how-grid{grid-template-columns:1fr}
+    footer{flex-direction:column}
+}
+</style>
+</head>
+
+<body>
+
+<header class="navbar">
+    <a class="logo" href="index.html">
+        <span class="logo-icon">✦</span>
+        <span>Study<span>X</span></span>
+    </a>
+
+    <nav class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How it Works</a>
+        <a href="#about">About</a>
+    </nav>
+
+    <div class="nav-actions">
+        <a class="btn" href="login.html">Log in</a>
+        <button class="btn btn-primary" onclick="startLearning()">Get Started</button>
+    </div>
+</header>
+
+<main>
+
+<section class="hero" id="home">
+    <div>
+        <div class="badge"><i></i> AI-Powered Learning Platform</div>
+
+        <h1>
+            Study Smarter.<br>
+            <span class="gradient-text">Learn Faster.</span>
+        </h1>
+
+        <p class="hero-copy">
+            StudyX is your personal AI study assistant — helping you understand
+            concepts, organize your studies, generate quizzes, and track your
+            progress, all in one place.
+        </p>
+
+        <div class="hero-actions">
+            <button class="btn btn-primary" onclick="startLearning()">Start Learning →</button>
+            <a class="btn" href="#features">Explore Features</a>
+        </div>
+
+        <div class="stats">
+            <div class="stat"><strong>AI</strong><span>Smart Tutor</span></div>
+            <div class="stat"><strong>24/7</strong><span>Available</span></div>
+            <div class="stat"><strong>∞</strong><span>Learn & Revise</span></div>
+        </div>
+    </div>
+
+    <div class="ai-preview">
+        <div class="ai-top">
+            <div class="ai-brand">
+                <div class="ai-icon">✦</div>
+                <div><strong>StudyX AI</strong><small>● Online</small></div>
+            </div>
+            <span class="online"></span>
+        </div>
+
+        <div class="chat">
+            <div class="msg user-msg">Explain photosynthesis in simple words.</div>
+            <div class="msg ai-msg">
+                Photosynthesis is the process by which plants use sunlight,
+                water, and carbon dioxide to make their food and release oxygen.
+            </div>
+
+            <div class="chips">
+                <span class="chip">Give me an example</span>
+                <span class="chip">Make a quiz</span>
+                <span class="chip">Explain more</span>
+            </div>
+
+            <div class="chat-input">
+                <input id="previewInput" placeholder="Ask StudyX anything...">
+                <button onclick="openTutor()">↑</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="features">
+    <div class="section-head">
+        <div class="eyebrow">EVERYTHING YOU NEED</div>
+        <h2>Your complete AI study workspace</h2>
+        <p>One platform for learning, practicing, planning and tracking your progress.</p>
+    </div>
+
+    <div class="features">
+        <div class="feature" onclick="openModule('ai-tutor.html')">
+            <div class="feature-icon">🤖</div>
+            <h3>AI Tutor</h3>
+            <p>Get instant explanations and clear your doubts with AI.</p>
+            <span class="arrow">→</span>
+        </div>
+
+        <div class="feature" onclick="openModule('study-materials.html')">
+            <div class="feature-icon">📚</div>
+            <h3>Study Materials</h3>
+            <p>Upload and organize your notes, PDFs and resources.</p>
+            <span class="arrow">→</span>
+        </div>
+
+        <div class="feature" onclick="openModule('quiz.html')">
+            <div class="feature-icon">📝</div>
+            <h3>Quiz Generator</h3>
+            <p>Create AI-powered quizzes from your study material.</p>
+            <span class="arrow">→</span>
+        </div>
+
+        <div class="feature" onclick="openModule('study-planner.html')">
+            <div class="feature-icon">📅</div>
+            <h3>Study Planner</h3>
+            <p>Generate a personalized study schedule with AI.</p>
+            <span class="arrow">→</span>
+        </div>
+
+        <div class="feature" onclick="openModule('progress.html')">
+            <div class="feature-icon">📊</div>
+            <h3>Progress Tracking</h3>
+            <p>Track quizzes, accuracy and study-plan completion.</p>
+            <span class="arrow">→</span>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="how-it-works">
+    <div class="section-head">
+        <div class="eyebrow">HOW IT WORKS</div>
+        <h2>Start learning in three steps</h2>
+        <p>StudyX keeps your entire learning workflow connected.</p>
+    </div>
+
+    <div class="how-grid">
+        <div class="step">
+            <div class="step-num">1</div>
+            <h3>Upload & Organize</h3>
+            <p>Add your PDFs and study materials so StudyX can work with your content.</p>
+        </div>
+        <div class="step">
+            <div class="step-num">2</div>
+            <h3>Learn with AI</h3>
+            <p>Ask questions, understand difficult concepts and generate practice quizzes.</p>
+        </div>
+        <div class="step">
+            <div class="step-num">3</div>
+            <h3>Track & Improve</h3>
+            <p>Follow your study plan and use progress analytics to improve consistently.</p>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="about">
+    <div class="about-box">
+        <div class="eyebrow">ABOUT STUDYX</div>
+        <h2>A smarter way to learn.</h2>
+        <p>
+            StudyX brings AI tutoring, study materials, quizzes, personalized
+            planning and progress tracking into one focused learning experience.
+        </p>
+        <button class="btn btn-primary" onclick="startLearning()">Start Learning →</button>
+    </div>
+</section>
+
+</main>
+
+<footer>
+    <span>© 2026 StudyX</span>
+    <span>AI-Powered Personal Study Assistant</span>
+</footer>
+
+<script>
+function isLoggedIn(){
+    try{
+        return !!JSON.parse(localStorage.getItem("studyxUser"));
+    }catch(e){
+        return false;
+    }
+}
+
+function startLearning(){
+    window.location.href = isLoggedIn() ? "dashboard.html" : "login.html";
+}
+
+function openTutor(){
+    window.location.href = isLoggedIn() ? "ai-tutor.html" : "login.html";
+}
+
+function openModule(page){
+    window.location.href = isLoggedIn() ? page : "login.html";
+}
+
+document.getElementById("previewInput").addEventListener("keydown", function(e){
+    if(e.key === "Enter"){
+        e.preventDefault();
+        openTutor();
+    }
+});
+</script>
+
+</body>
+</html>

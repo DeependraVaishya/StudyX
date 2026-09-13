@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Study Planner - StudyX</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="dashboard-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+            <div class="logo-icon">S</div>
+
+            <div>
+                <h2>StudyX</h2>
+                <span>AI Study Assistant</span>
+            </div>
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <a href="dashboard.html">
+                <span>⌂</span>
+                Dashboard
+            </a>
+
+            <a href="ai-tutor.html">
+                <span>✦</span>
+                AI Tutor
+            </a>
+
+            <a href="study-materials.html">
+                <span>▣</span>
+                Study Materials
+            </a>
+
+            <a href="quiz.html">
+                <span>✓</span>
+                Quiz Generator
+            </a>
+
+            <a href="study-planner.html" class="active">
+                <span>◷</span>
+                Study Planner
+            </a>
+
+            <a href="progress.html">
+                <span>📊</span>
+                Progress
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="sidebar-user">
+
+                <div class="user-avatar" id="userAvatar">
+                    D
+                </div>
+
+                <div>
+                    <strong id="userName">
+                        Student
+                    </strong>
+
+                    <small id="userEmail">
+                        student@email.com
+                    </small>
+                </div>
+
+            </div>
+
+
+            <button class="logout-btn" id="logoutBtn">
+                Logout
+            </button>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- MAIN CONTENT -->
+    <main class="dashboard-main">
+
+        <!-- HEADER -->
+        <header class="dashboard-header">
+
+            <div>
+
+                <h1>Study Planner</h1>
+
+                <p>
+                    Create a personalized study plan with AI.
+                </p>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- PLANNER SETUP -->
+        <section class="planner-card" id="plannerSetup">
+
+            <div class="planner-heading">
+
+                <div class="planner-icon">
+                    ✦
+                </div>
+
+                <div>
+
+                    <h2>Create Your Study Plan</h2>
+
+                    <p>
+                        Tell StudyX about your goal and we'll
+                        organize your study schedule.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="planner-form">
+
+                <!-- GOAL -->
+                <div class="planner-field full">
+
+                    <label for="studyGoal">
+                        Study Goal
+                    </label>
+
+                    <input
+                        type="text"
+                        id="studyGoal"
+                        placeholder="Example: Prepare for my Computer Science exam"
+                    >
+
+                </div>
+
+
+
+                <!-- SUBJECT -->
+                <div class="planner-field">
+
+                    <label for="subject">
+                        Subject
+                    </label>
+
+                    <input
+                        type="text"
+                        id="subject"
+                        placeholder="Example: Computer Science"
+                    >
+
+                </div>
+
+
+
+                <!-- EXAM DATE -->
+                <div class="planner-field">
+
+                    <label for="examDate">
+                        Exam / Target Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="examDate"
+                    >
+
+                </div>
+
+
+
+                <!-- DAILY TIME -->
+                <div class="planner-field">
+
+                    <label for="dailyHours">
+                        Daily Study Time
+                    </label>
+
+                    <select id="dailyHours">
+
+                        <option value="1">
+                            1 Hour
+                        </option>
+
+                        <option value="2" selected>
+                            2 Hours
+                        </option>
+
+                        <option value="3">
+                            3 Hours
+                        </option>
+
+                        <option value="4">
+                            4 Hours
+                        </option>
+
+                        <option value="5">
+                            5+ Hours
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- DIFFICULTY -->
+                <div class="planner-field">
+
+                    <label for="studyLevel">
+                        Current Level
+                    </label>
+
+                    <select id="studyLevel">
+
+                        <option value="beginner">
+                            Beginner
+                        </option>
+
+                        <option value="intermediate" selected>
+                            Intermediate
+                        </option>
+
+                        <option value="advanced">
+                            Advanced
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- TOPICS -->
+                <div class="planner-field full">
+
+                    <label for="topics">
+                        Topics / Syllabus
+                    </label>
+
+                    <textarea
+                        id="topics"
+                        rows="5"
+                        placeholder="Example:
+Data Structures
+Arrays
+Linked Lists
+Stacks and Queues
+Trees
+Graphs
+Sorting Algorithms"
+                    ></textarea>
+
+                </div>
+
+            </div>
+
+
+
+            <button
+                class="generate-plan-btn"
+                id="generatePlanBtn"
+            >
+
+                ✦ Generate AI Study Plan
+
+            </button>
+
+
+            <p
+                class="planner-status"
+                id="plannerStatus"
+            ></p>
+
+        </section>
+
+
+
+        <!-- LOADING -->
+        <section
+            class="planner-loading"
+            id="plannerLoading"
+            style="display:none;"
+        >
+
+            <div class="loading-spinner"></div>
+
+            <h2>
+                Creating your study plan...
+            </h2>
+
+            <p>
+                StudyX AI is organizing your topics
+                into a personalized schedule.
+            </p>
+
+        </section>
+
+
+
+        <!-- GENERATED PLAN -->
+        <section
+            class="study-plan"
+            id="studyPlan"
+            style="display:none;"
+        >
+
+            <div class="plan-header">
+
+                <div>
+
+                    <span class="quiz-label">
+                        AI STUDY PLAN
+                    </span>
+
+                    <h2 id="planTitle">
+                        Your Personalized Study Plan
+                    </h2>
+
+                    <p id="planSummary">
+                        Your study schedule is ready.
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="secondary-btn"
+                    id="newPlanBtn"
+                >
+                    ← New Plan
+                </button>
+
+            </div>
+
+
+
+            <!-- PLAN STATS -->
+            <div class="plan-stats">
+
+                <div class="plan-stat">
+
+                    <span>📅</span>
+
+                    <div>
+                        <strong id="totalDays">
+                            0
+                        </strong>
+
+                        <small>
+                            Study Days
+                        </small>
+                    </div>
+
+                </div>
+
+
+                <div class="plan-stat">
+
+                    <span>📚</span>
+
+                    <div>
+                        <strong id="totalTopics">
+                            0
+                        </strong>
+
+                        <small>
+                            Topics
+                        </small>
+                    </div>
+
+                </div>
+
+
+                <div class="plan-stat">
+
+                    <span>⏱</span>
+
+                    <div>
+                        <strong id="totalHours">
+                            0h
+                        </strong>
+
+                        <small>
+                            Study Time
+                        </small>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- DAILY PLAN -->
+            <div
+                class="daily-plan"
+                id="dailyPlan"
+            ></div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+
+<script src="study-planner.js"></script>
+
+</body>
+</html>

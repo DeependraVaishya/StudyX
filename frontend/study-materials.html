@@ -1,0 +1,1737 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Study Materials | StudyX</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* =====================================================
+           STUDY MATERIALS
+        ===================================================== */
+
+        .materials-page {
+            min-height: 100vh;
+            background: #08090d;
+            color: #f5f7fb;
+        }
+
+        .materials-layout {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 280px minmax(0, 1fr);
+        }
+
+
+        /* =====================================================
+           SIDEBAR
+        ===================================================== */
+
+        .materials-page .sidebar {
+            position: sticky !important;
+            top: 0 !important;
+
+            width: 280px !important;
+            height: 100vh !important;
+
+            padding: 28px 18px !important;
+
+            display: flex !important;
+            flex-direction: column !important;
+
+            background: #0b0d12 !important;
+            border-right: 1px solid rgba(255,255,255,.08);
+
+            overflow-y: auto !important;
+            overflow-x: hidden !important;
+
+            box-sizing: border-box !important;
+        }
+
+        .sidebar-logo {
+            padding: 0 12px;
+            margin-bottom: 45px;
+        }
+
+        .sidebar-logo .logo {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+
+            font-size: 21px;
+            font-weight: 750;
+        }
+
+        .sidebar-logo .logo-icon {
+            width: 31px;
+            height: 31px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 9px;
+
+            background: linear-gradient(
+                135deg,
+                #8b5cf6,
+                #6d28d9
+            );
+
+            color: white;
+        }
+
+        .sidebar-logo .logo span span {
+            color: #a78bfa;
+        }
+
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .sidebar-link {
+            display: flex !important;
+            align-items: center !important;
+            gap: 13px !important;
+
+            width: 100% !important;
+            padding: 13px 14px !important;
+
+            border-radius: 11px !important;
+
+            color: #a4a9b8 !important;
+
+            font-size: 14px !important;
+            font-weight: 500 !important;
+
+            text-decoration: none !important;
+
+            transition: .2s ease !important;
+
+            box-sizing: border-box !important;
+        }
+
+        .sidebar-link:hover {
+            color: white !important;
+            background: rgba(255,255,255,.045) !important;
+        }
+
+        .sidebar-link.active {
+            color: white !important;
+            background: rgba(139,92,246,.16) !important;
+            font-weight: 650 !important;
+        }
+
+        .sidebar-icon {
+            width: 25px;
+            flex-shrink: 0;
+
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .sidebar-bottom {
+            margin-top: auto;
+
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+
+        /* =====================================================
+           MAIN
+        ===================================================== */
+
+        .materials-main {
+            min-width: 0;
+            width: 100%;
+
+            padding: 32px 54px 70px;
+
+            box-sizing: border-box;
+        }
+
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        .materials-header {
+            width: 100%;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+
+            gap: 30px;
+
+            margin-bottom: 43px;
+        }
+
+        .materials-header h1 {
+            margin: 8px 0 7px;
+
+            font-size: 38px;
+            line-height: 1.1;
+
+            letter-spacing: -1.7px;
+        }
+
+        .materials-header p {
+            margin: 0;
+
+            color: #72788a;
+
+            font-size: 14px;
+        }
+
+        .section-label {
+            color: #a78bfa;
+
+            font-size: 11px;
+            font-weight: 700;
+
+            letter-spacing: 1.7px;
+        }
+
+
+        /* =====================================================
+           PROFILE
+        ===================================================== */
+
+        .user-profile {
+            min-width: 205px;
+
+            display: flex;
+            align-items: center;
+
+            gap: 11px;
+
+            padding: 10px 14px;
+
+            background: #11131b;
+
+            border: 1px solid rgba(255,255,255,.08);
+            border-radius: 14px;
+
+            box-sizing: border-box;
+        }
+
+        .user-avatar {
+            width: 42px;
+            height: 42px;
+
+            display: grid;
+            place-items: center;
+
+            flex-shrink: 0;
+
+            border-radius: 11px;
+
+            background: linear-gradient(
+                135deg,
+                #8b5cf6,
+                #6d28d9
+            );
+
+            color: white;
+
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .user-info strong {
+            display: block;
+
+            margin-bottom: 2px;
+
+            color: white;
+            font-size: 13px;
+        }
+
+        .user-info span {
+            display: block;
+
+            color: #72788a;
+
+            font-size: 11px;
+        }
+
+
+        /* =====================================================
+           SECTIONS
+        ===================================================== */
+
+        .materials-section {
+            width: 100%;
+            margin-bottom: 48px;
+        }
+
+        .section-heading {
+            margin-bottom: 17px;
+        }
+
+        .section-heading h2 {
+            margin: 7px 0 5px;
+
+            font-size: 26px;
+            letter-spacing: -.8px;
+        }
+
+        .section-heading p {
+            margin: 0;
+
+            color: #72788a;
+
+            font-size: 13px;
+        }
+
+
+        /* =====================================================
+           UPLOAD CARD
+        ===================================================== */
+
+        .upload-wrapper {
+            width: 100%;
+
+            padding: 0;
+
+            background: #11131b;
+
+            border: 1px solid rgba(255,255,255,.08);
+            border-radius: 20px;
+
+            box-sizing: border-box;
+        }
+
+        .upload-box {
+            width: calc(100% - 28px) !important;
+            min-height: 285px !important;
+
+            margin: 14px !important;
+
+            display: flex !important;
+            flex-direction: column !important;
+
+            align-items: center !important;
+            justify-content: center !important;
+
+            text-align: center;
+
+            padding: 35px 20px;
+
+            box-sizing: border-box;
+
+            border: 1px dashed rgba(139,92,246,.55) !important;
+            border-radius: 17px !important;
+
+            background: rgba(139,92,246,.025) !important;
+
+            transition: .25s ease;
+        }
+
+        .upload-box:hover,
+        .upload-box.dragging {
+            border-color: #8b5cf6 !important;
+            background: rgba(139,92,246,.07) !important;
+        }
+
+        .upload-icon {
+            width: 62px;
+            height: 62px;
+
+            display: grid;
+            place-items: center;
+
+            margin-bottom: 18px;
+
+            border-radius: 15px;
+
+            background: rgba(139,92,246,.16);
+
+            color: #a78bfa;
+
+            font-size: 28px;
+        }
+
+        .upload-box h3 {
+            margin: 0 0 7px;
+
+            font-size: 19px;
+        }
+
+        .upload-box p {
+            margin: 0 0 21px;
+
+            color: #72788a;
+
+            font-size: 13px;
+        }
+
+        .choose-button {
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 12px 22px;
+
+            border-radius: 10px;
+
+            background: #8b5cf6;
+
+            color: white;
+
+            font-size: 13px;
+            font-weight: 650;
+
+            cursor: pointer;
+
+            transition: .2s ease;
+        }
+
+        .choose-button:hover {
+            background: #a78bfa;
+            transform: translateY(-1px);
+        }
+
+        #fileInput {
+            display: none;
+        }
+
+        .upload-note {
+            margin-top: 16px;
+
+            color: #72788a;
+
+            font-size: 10px;
+        }
+
+        .upload-status {
+            min-height: 22px;
+
+            margin-top: 10px;
+
+            text-align: center;
+
+            font-size: 13px;
+        }
+
+        .upload-status.success {
+            color: #6ee7b7;
+        }
+
+        .upload-status.error {
+            color: #f87171;
+        }
+
+        .upload-status.loading {
+            color: #a78bfa;
+        }
+
+
+        /* =====================================================
+           LIBRARY HEADER
+        ===================================================== */
+
+        .library-header {
+            width: 100%;
+
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+
+            gap: 25px;
+
+            margin-bottom: 20px;
+        }
+
+        .library-title h2 {
+            margin: 7px 0 0;
+
+            font-size: 26px;
+            letter-spacing: -.8px;
+        }
+
+        .search-box {
+            width: 305px;
+
+            height: 48px;
+
+            display: flex;
+            align-items: center;
+
+            padding: 0 14px;
+
+            background: #11131b;
+
+            border: 1px solid rgba(255,255,255,.08);
+            border-radius: 11px;
+
+            box-sizing: border-box;
+        }
+
+        .search-icon {
+            margin-right: 10px;
+
+            color: #72788a;
+
+            font-size: 17px;
+        }
+
+        .search-box input {
+            width: 100%;
+
+            border: none;
+            outline: none;
+
+            background: transparent;
+
+            color: white;
+
+            font-size: 12px;
+        }
+
+        .search-box input::placeholder {
+            color: #555b6b;
+        }
+
+
+        /* =====================================================
+           MATERIAL CARDS
+        ===================================================== */
+
+        .materials-grid {
+            width: 100%;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    auto-fill,
+                    minmax(330px, 1fr)
+                );
+
+            gap: 15px;
+        }
+
+        .material-card {
+            min-width: 0;
+
+            padding: 20px;
+
+            background: #11131b;
+
+            border: 1px solid rgba(255,255,255,.08);
+            border-radius: 16px;
+
+            transition: .22s ease;
+
+            box-sizing: border-box;
+        }
+
+        .material-card:hover {
+            transform: translateY(-3px);
+
+            background: #151824;
+
+            border-color: rgba(139,92,246,.3);
+        }
+
+        .material-content {
+            display: flex;
+            align-items: center;
+
+            gap: 16px;
+        }
+
+        .pdf-icon {
+            width: 58px;
+            height: 58px;
+
+            display: grid;
+            place-items: center;
+
+            flex-shrink: 0;
+
+            border-radius: 13px;
+
+            background: rgba(239,68,68,.1);
+
+            font-size: 27px;
+        }
+
+        .material-info {
+            min-width: 0;
+            flex: 1;
+        }
+
+        .material-info h3 {
+            margin: 0 0 9px;
+
+            overflow: hidden;
+
+            color: white;
+
+            font-size: 15px;
+
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .material-meta {
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+            color: #72788a;
+
+            font-size: 11px;
+        }
+
+        .material-meta span {
+            white-space: nowrap;
+        }
+
+        .delete-button {
+            width: 36px;
+            height: 36px;
+
+            display: grid;
+            place-items: center;
+
+            flex-shrink: 0;
+
+            border: 1px solid rgba(255,255,255,.08);
+            border-radius: 9px;
+
+            background: transparent;
+
+            color: #72788a;
+
+            cursor: pointer;
+
+            transition: .2s ease;
+        }
+
+        .delete-button:hover {
+            color: #f87171;
+
+            border-color: rgba(248,113,113,.3);
+
+            background: rgba(248,113,113,.08);
+        }
+
+
+        /* =====================================================
+           EMPTY STATE
+        ===================================================== */
+
+        .empty-state {
+            width: 100%;
+
+            padding: 55px 20px;
+
+            text-align: center;
+
+            border: 1px dashed rgba(255,255,255,.1);
+            border-radius: 16px;
+
+            box-sizing: border-box;
+        }
+
+        .empty-icon {
+            margin-bottom: 12px;
+
+            font-size: 30px;
+        }
+
+        .empty-state h3 {
+            margin: 0 0 5px;
+
+            font-size: 16px;
+        }
+
+        .empty-state p {
+            margin: 0;
+
+            color: #72788a;
+
+            font-size: 12px;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 1000px) {
+
+            .materials-page .sidebar {
+                width: 230px !important;
+            }
+
+            .materials-layout {
+                grid-template-columns: 230px minmax(0,1fr);
+            }
+
+            .materials-main {
+                padding: 30px;
+            }
+
+            .materials-grid {
+                grid-template-columns:
+                    repeat(
+                        auto-fill,
+                        minmax(280px, 1fr)
+                    );
+            }
+        }
+
+
+        @media (max-width: 760px) {
+
+            .materials-layout {
+                display: block;
+            }
+
+            .materials-page .sidebar {
+                display: none !important;
+            }
+
+            .materials-main {
+                width: 100%;
+                padding: 25px 18px 50px;
+            }
+
+            .materials-header {
+                flex-direction: column;
+            }
+
+            .user-profile {
+                width: 100%;
+            }
+
+            .library-header {
+                align-items: stretch;
+                flex-direction: column;
+            }
+
+            .search-box {
+                width: 100%;
+            }
+
+            .materials-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+
+<body class="materials-page">
+
+<div class="materials-layout">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+
+            <a href="dashboard.html" class="logo">
+
+                <span class="logo-icon">✦</span>
+
+                <span>
+                    Study<span>X</span>
+                </span>
+
+            </a>
+
+        </div>
+
+
+                <nav class="sidebar-nav">
+
+            <a
+                href="dashboard.html"
+                class="sidebar-link">
+
+                <span class="sidebar-icon">⌂</span>
+                Dashboard
+
+            </a>
+
+
+            <a
+                href="ai-tutor.html"
+                class="sidebar-link">
+
+                <span class="sidebar-icon">🤖</span>
+                AI Tutor
+
+            </a>
+
+
+            <a
+                href="study-materials.html"
+                class="sidebar-link active">
+
+                <span class="sidebar-icon">📚</span>
+                Study Materials
+
+            </a>
+
+
+            <a
+                href="quiz.html"
+                class="sidebar-link">
+
+                <span class="sidebar-icon">📝</span>
+                Quiz Generator
+
+            </a>
+
+
+            <a
+                href="study-planner.html"
+                class="sidebar-link">
+
+                <span class="sidebar-icon">🗓️</span>
+                Study Planner
+
+            </a>
+
+
+            <a
+                href="progress.html"
+                class="sidebar-link">
+
+                <span class="sidebar-icon">📊</span>
+                Progress
+
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <a
+                href="#"
+                class="sidebar-link">
+
+                <span class="sidebar-icon">⚙</span>
+
+                Settings
+
+            </a>
+
+
+            <a
+                href="#"
+                class="sidebar-link"
+                id="logoutBtn">
+
+                <span class="sidebar-icon">↪</span>
+
+                Logout
+
+            </a>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="materials-main">
+
+
+        <!-- HEADER -->
+
+        <header class="materials-header">
+
+            <div>
+
+                <span class="section-label">
+                    LEARNING RESOURCES
+                </span>
+
+                <h1>
+                    Study Materials
+                </h1>
+
+                <p>
+                    Upload, organize and learn from your study materials.
+                </p>
+
+            </div>
+
+
+            <div class="user-profile">
+
+                <div
+                    class="user-avatar"
+                    id="userAvatar">
+
+                    D
+
+                </div>
+
+
+                <div class="user-info">
+
+                    <strong id="userName">
+                        Student
+                    </strong>
+
+                    <span id="userEmail">
+                        student@example.com
+                    </span>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =================================================
+             UPLOAD
+        ================================================== -->
+
+        <section class="materials-section">
+
+            <div class="section-heading">
+
+                <span class="section-label">
+                    ADD MATERIAL
+                </span>
+
+                <h2>
+                    Upload your study material
+                </h2>
+
+                <p>
+                    Add PDF notes and study documents to your StudyX library.
+                </p>
+
+            </div>
+
+
+            <div class="upload-wrapper">
+
+                <div
+                    class="upload-box"
+                    id="uploadBox">
+
+                    <div class="upload-icon">
+                        ↑
+                    </div>
+
+
+                    <h3>
+                        Upload your PDF
+                    </h3>
+
+
+                    <p>
+                        Drag & drop your PDF here or choose a file from your computer.
+                    </p>
+
+
+                    <label
+                        for="fileInput"
+                        class="choose-button">
+
+                        Choose File
+
+                    </label>
+
+
+                    <input
+                        type="file"
+                        id="fileInput"
+                        accept=".pdf,application/pdf"
+                    >
+
+
+                    <div class="upload-note">
+
+                        Supported format: PDF • Maximum size: 10MB
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="uploadStatus"
+                class="upload-status">
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             LIBRARY
+        ================================================== -->
+
+        <section class="materials-section">
+
+
+            <div class="library-header">
+
+                <div class="library-title">
+
+                    <span class="section-label">
+                        YOUR LIBRARY
+                    </span>
+
+                    <h2>
+                        My Materials
+                    </h2>
+
+                </div>
+
+
+                <div class="search-box">
+
+                    <span class="search-icon">
+                        ⌕
+                    </span>
+
+                    <input
+                        type="text"
+                        id="materialSearch"
+                        placeholder="Search materials..."
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div id="materialsContainer">
+
+                <div class="empty-state">
+
+                    <div class="empty-icon">
+                        📚
+                    </div>
+
+                    <h3>
+                        Loading materials...
+                    </h3>
+
+                    <p>
+                        Please wait.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+
+<script>
+
+    /* =====================================================
+       API
+    ===================================================== */
+
+    const API_URL =
+        "http://127.0.0.1:8000";
+
+
+    /* =====================================================
+       LOGIN CHECK
+    ===================================================== */
+
+    const savedUser =
+        localStorage.getItem("studyxUser");
+
+
+    if (!savedUser) {
+
+        window.location.href =
+            "login.html";
+
+    }
+
+
+    let user = null;
+
+
+    try {
+
+        user =
+            JSON.parse(savedUser);
+
+    } catch (error) {
+
+        localStorage.removeItem(
+            "studyxUser"
+        );
+
+        window.location.href =
+            "login.html";
+
+    }
+
+
+    if (!user || !user.email) {
+
+        localStorage.removeItem(
+            "studyxUser"
+        );
+
+        window.location.href =
+            "login.html";
+
+    }
+
+
+
+    /* =====================================================
+       USER INFORMATION
+    ===================================================== */
+
+    document.getElementById(
+        "userName"
+    ).textContent =
+        user.name || "Student";
+
+
+    document.getElementById(
+        "userEmail"
+    ).textContent =
+        user.email;
+
+
+    document.getElementById(
+        "userAvatar"
+    ).textContent =
+        (user.name || "S")
+            .charAt(0)
+            .toUpperCase();
+
+
+
+    /* =====================================================
+       ELEMENTS
+    ===================================================== */
+
+    const fileInput =
+        document.getElementById(
+            "fileInput"
+        );
+
+    const uploadBox =
+        document.getElementById(
+            "uploadBox"
+        );
+
+    const uploadStatus =
+        document.getElementById(
+            "uploadStatus"
+        );
+
+    const materialsContainer =
+        document.getElementById(
+            "materialsContainer"
+        );
+
+    const materialSearch =
+        document.getElementById(
+            "materialSearch"
+        );
+
+
+
+    /* =====================================================
+       STATUS
+    ===================================================== */
+
+    function showStatus(
+        message,
+        type = ""
+    ) {
+
+        uploadStatus.textContent =
+            message;
+
+        uploadStatus.className =
+            "upload-status " + type;
+
+    }
+
+
+
+    /* =====================================================
+       HTML ESCAPE
+    ===================================================== */
+
+    function escapeHTML(value) {
+
+        const div =
+            document.createElement(
+                "div"
+            );
+
+        div.textContent =
+            value || "";
+
+        return div.innerHTML;
+
+    }
+
+
+
+    /* =====================================================
+       UPLOAD PDF
+    ===================================================== */
+
+    async function uploadPDF(file) {
+
+        if (!file) {
+            return;
+        }
+
+
+        /* FILE TYPE */
+
+        if (
+            !file.name
+                .toLowerCase()
+                .endsWith(".pdf")
+        ) {
+
+            showStatus(
+                "Only PDF files are supported.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        /* FILE SIZE */
+
+        if (
+            file.size >
+            10 * 1024 * 1024
+        ) {
+
+            showStatus(
+                "PDF size must be less than 10MB.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        showStatus(
+            "Uploading and processing PDF...",
+            "loading"
+        );
+
+
+        /* =================================================
+           FORM DATA
+           FILE + EMAIL
+        ================================================= */
+
+        const formData =
+            new FormData();
+
+
+        formData.append(
+            "file",
+            file
+        );
+
+
+        formData.append(
+            "email",
+            user.email
+        );
+
+
+        try {
+
+            const response =
+                await fetch(
+                    `${API_URL}/materials/upload?email=${encodeURIComponent(user.email)}`,
+                    {
+                        method: "POST",
+
+                        body: formData
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    data.detail ||
+                    "Unable to upload PDF."
+                );
+
+            }
+
+
+            showStatus(
+                "PDF uploaded successfully! ✓",
+                "success"
+            );
+
+
+            fileInput.value = "";
+
+
+            await loadMaterials();
+
+
+        } catch (error) {
+
+            console.error(
+                "Upload Error:",
+                error
+            );
+
+
+            showStatus(
+                error.message ||
+                "Unable to upload PDF. Check your FastAPI server.",
+                "error"
+            );
+
+        }
+
+    }
+
+
+
+    /* =====================================================
+       FILE SELECT
+    ===================================================== */
+
+    fileInput.addEventListener(
+        "change",
+        function () {
+
+            uploadPDF(
+                this.files[0]
+            );
+
+        }
+    );
+
+
+
+    /* =====================================================
+       DRAG OVER
+    ===================================================== */
+
+    uploadBox.addEventListener(
+        "dragover",
+        function (event) {
+
+            event.preventDefault();
+
+            uploadBox.classList.add(
+                "dragging"
+            );
+
+        }
+    );
+
+
+
+    /* =====================================================
+       DRAG LEAVE
+    ===================================================== */
+
+    uploadBox.addEventListener(
+        "dragleave",
+        function () {
+
+            uploadBox.classList.remove(
+                "dragging"
+            );
+
+        }
+    );
+
+
+
+    /* =====================================================
+       DROP
+    ===================================================== */
+
+    uploadBox.addEventListener(
+        "drop",
+        function (event) {
+
+            event.preventDefault();
+
+            uploadBox.classList.remove(
+                "dragging"
+            );
+
+
+            const file =
+                event.dataTransfer.files[0];
+
+
+            uploadPDF(file);
+
+        }
+    );
+
+
+
+    /* =====================================================
+       LOAD MATERIALS
+    ===================================================== */
+
+    async function loadMaterials() {
+
+        try {
+
+            const response =
+                await fetch(
+                    `${API_URL}/materials?email=${encodeURIComponent(user.email)}`
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    data.detail ||
+                    "Unable to load materials."
+                );
+
+            }
+
+
+            renderMaterials(
+                data.materials || []
+            );
+
+
+        } catch (error) {
+
+            console.error(
+                "Materials Error:",
+                error
+            );
+
+
+            materialsContainer.innerHTML = `
+
+                <div class="empty-state">
+
+                    <div class="empty-icon">
+                        ⚠️
+                    </div>
+
+                    <h3>
+                        Unable to load materials
+                    </h3>
+
+                    <p>
+                        Make sure your FastAPI server is running.
+                    </p>
+
+                </div>
+
+            `;
+
+        }
+
+    }
+
+
+
+    /* =====================================================
+       RENDER MATERIALS
+    ===================================================== */
+
+    function renderMaterials(
+        materials
+    ) {
+
+        const searchText =
+            materialSearch.value
+                .trim()
+                .toLowerCase();
+
+
+        const filteredMaterials =
+            materials.filter(
+                material =>
+                    material.filename
+                        .toLowerCase()
+                        .includes(searchText)
+            );
+
+
+        if (
+            filteredMaterials.length === 0
+        ) {
+
+            materialsContainer.innerHTML = `
+
+                <div class="empty-state">
+
+                    <div class="empty-icon">
+                        ${
+                            searchText
+                                ? "🔎"
+                                : "📚"
+                        }
+                    </div>
+
+                    <h3>
+                        ${
+                            searchText
+                                ? "No materials found"
+                                : "No study materials yet"
+                        }
+                    </h3>
+
+                    <p>
+                        ${
+                            searchText
+                                ? "Try another search."
+                                : "Upload your first PDF to start building your library."
+                        }
+                    </p>
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        materialsContainer.innerHTML = `
+
+            <div class="materials-grid">
+
+                ${filteredMaterials
+                    .map(
+                        material => `
+
+                        <article class="material-card">
+
+                            <div class="material-content">
+
+
+                                <div class="pdf-icon">
+                                    📄
+                                </div>
+
+
+                                <div class="material-info">
+
+                                    <h3
+                                        title="${escapeHTML(material.filename)}">
+
+                                        ${escapeHTML(
+                                            material.filename
+                                        )}
+
+                                    </h3>
+
+
+                                    <div class="material-meta">
+
+                                        <span>
+                                            📑 ${material.pages} pages
+                                        </span>
+
+                                        <span>
+                                            📝 ${material.text_length} chars
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+
+                                <button
+                                    class="delete-button"
+                                    title="Delete material"
+                                    onclick="deleteMaterial('${material.id}')">
+
+                                    🗑
+
+                                </button>
+
+
+                            </div>
+
+                        </article>
+
+                    `
+                    )
+                    .join("")}
+
+            </div>
+
+        `;
+
+    }
+
+
+
+    /* =====================================================
+       DELETE MATERIAL
+    ===================================================== */
+
+    async function deleteMaterial(
+        materialId
+    ) {
+
+        const confirmed =
+            confirm(
+                "Are you sure you want to delete this material?"
+            );
+
+
+        if (!confirmed) {
+            return;
+        }
+
+
+        try {
+
+            const response =
+                await fetch(
+                    `${API_URL}/materials/${materialId}`,
+                    {
+                        method: "DELETE"
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    data.detail ||
+                    "Unable to delete material."
+                );
+
+            }
+
+
+            await loadMaterials();
+
+
+        } catch (error) {
+
+            alert(
+                error.message ||
+                "Unable to delete material."
+            );
+
+        }
+
+    }
+
+
+
+    /* =====================================================
+       SEARCH
+    ===================================================== */
+
+    materialSearch.addEventListener(
+        "input",
+        loadMaterials
+    );
+
+
+
+    /* =====================================================
+       LOGOUT
+    ===================================================== */
+
+    document
+        .getElementById("logoutBtn")
+        .addEventListener(
+            "click",
+            function (event) {
+
+                event.preventDefault();
+
+                localStorage.removeItem(
+                    "studyxUser"
+                );
+
+                window.location.href =
+                    "login.html";
+
+            }
+        );
+
+
+
+    /* =====================================================
+       INITIAL LOAD
+    ===================================================== */
+
+    loadMaterials();
+
+</script>
+
+</body>
+
+</html>

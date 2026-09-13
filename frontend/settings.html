@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Settings | StudyX</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .settings-main {
+            max-width: 1000px;
+        }
+
+        .settings-grid {
+            display: grid;
+            gap: 22px;
+            margin-top: 30px;
+        }
+
+        .settings-card {
+            background: #111318;
+            border: 1px solid #242832;
+            border-radius: 16px;
+            padding: 26px;
+        }
+
+        .settings-card h2 {
+            margin: 0 0 7px;
+            font-size: 20px;
+        }
+
+        .settings-card > p {
+            color: #8d94a3;
+            margin: 0 0 22px;
+            font-size: 14px;
+        }
+
+        .profile-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .settings-avatar {
+            width: 62px;
+            height: 62px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #171a22;
+            border: 1px solid #343a48;
+            color: #a78bfa;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .profile-info strong {
+            display: block;
+            font-size: 17px;
+        }
+
+        .profile-info span {
+            display: block;
+            color: #8d94a3;
+            margin-top: 5px;
+            font-size: 14px;
+        }
+
+        .setting-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0;
+            border-bottom: 1px solid #242832;
+        }
+
+        .setting-row:last-child {
+            border-bottom: none;
+        }
+
+        .setting-info strong {
+            display: block;
+            font-size: 15px;
+        }
+
+        .setting-info span {
+            display: block;
+            color: #8d94a3;
+            font-size: 13px;
+            margin-top: 5px;
+        }
+
+        .setting-btn {
+            background: #171a22;
+            border: 1px solid #343a48;
+            color: #fff;
+            padding: 9px 16px;
+            border-radius: 9px;
+            cursor: pointer;
+        }
+
+        .setting-btn:hover {
+            border-color: #8b5cf6;
+        }
+
+        .danger-btn {
+            border-color: #5b2630;
+            color: #ff8b9a;
+        }
+
+        .danger-btn:hover {
+            border-color: #ef4444;
+        }
+    </style>
+</head>
+
+<body class="dashboard-page">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <a href="dashboard.html" class="logo">
+            <span class="logo-icon">✦</span>
+            <span>Study<span>X</span></span>
+        </a>
+
+        <nav class="sidebar-nav">
+
+            <a href="dashboard.html" class="nav-item">
+                <span>🏠</span>
+                Dashboard
+            </a>
+
+            <a href="ai-tutor.html" class="nav-item">
+                <span>🤖</span>
+                AI Tutor
+            </a>
+
+            <a href="study-materials.html" class="nav-item">
+                <span>📚</span>
+                Study Materials
+            </a>
+
+            <a href="quiz.html" class="nav-item">
+                <span>📝</span>
+                Quiz Generator
+            </a>
+
+            <a href="study-planner.html" class="nav-item">
+                <span>📅</span>
+                Study Planner
+            </a>
+
+            <a href="progress.html" class="nav-item">
+                <span>📊</span>
+                Progress
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <a href="settings.html" class="nav-item active">
+                <span>⚙</span>
+                Settings
+            </a>
+
+            <button id="logoutBtn" class="logout-btn">
+                <span>↪</span>
+                Logout
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+    <main class="dashboard-main settings-main">
+
+        <header class="dashboard-header">
+
+            <div>
+                <span class="section-label">
+                    ACCOUNT
+                </span>
+
+                <h1>
+                    Settings
+                </h1>
+
+                <p>
+                    Manage your StudyX account and preferences.
+                </p>
+            </div>
+
+            <div class="user-profile">
+
+                <div class="profile-avatar" id="userAvatar">
+                    S
+                </div>
+
+                <div>
+                    <strong id="profileName">
+                        Student
+                    </strong>
+
+                    <small id="profileEmail">
+                        student@example.com
+                    </small>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <section class="settings-grid">
+
+            <!-- PROFILE -->
+            <div class="settings-card">
+
+                <h2>Profile</h2>
+
+                <p>
+                    Your StudyX account information.
+                </p>
+
+                <div class="profile-row">
+
+                    <div class="settings-avatar" id="settingsAvatar">
+                        S
+                    </div>
+
+                    <div class="profile-info">
+
+                        <strong id="settingsName">
+                            Student
+                        </strong>
+
+                        <span id="settingsEmail">
+                            student@example.com
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PREFERENCES -->
+            <div class="settings-card">
+
+                <h2>Preferences</h2>
+
+                <p>
+                    Customize your StudyX experience.
+                </p>
+
+                <div class="setting-row">
+
+                    <div class="setting-info">
+
+                        <strong>Appearance</strong>
+
+                        <span>
+                            StudyX currently uses the dark interface.
+                        </span>
+
+                    </div>
+
+                    <button class="setting-btn" disabled>
+                        Dark
+                    </button>
+
+                </div>
+
+
+                <div class="setting-row">
+
+                    <div class="setting-info">
+
+                        <strong>Notifications</strong>
+
+                        <span>
+                            Manage study reminders and notifications.
+                        </span>
+
+                    </div>
+
+                    <button class="setting-btn" disabled>
+                        Soon
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- SECURITY -->
+            <div class="settings-card">
+
+                <h2>Security</h2>
+
+                <p>
+                    Keep your StudyX account secure.
+                </p>
+
+                <div class="setting-row">
+
+                    <div class="setting-info">
+
+                        <strong>Password</strong>
+
+                        <span>
+                            Password management will be available here.
+                        </span>
+
+                    </div>
+
+                    <button class="setting-btn" disabled>
+                        Soon
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- ACCOUNT -->
+            <div class="settings-card">
+
+                <h2>Account</h2>
+
+                <p>
+                    Manage your StudyX session.
+                </p>
+
+                <div class="setting-row">
+
+                    <div class="setting-info">
+
+                        <strong>Logout</strong>
+
+                        <span>
+                            Sign out from your StudyX account.
+                        </span>
+
+                    </div>
+
+                    <button class="setting-btn danger-btn" id="logoutBtn2">
+                        Logout
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script>
+
+        const user = JSON.parse(
+            localStorage.getItem("studyxUser")
+        );
+
+        if (!user) {
+            window.location.href = "login.html";
+        }
+
+        if (user) {
+
+            const name =
+                user.name || "Student";
+
+            const email =
+                user.email || "student@example.com";
+
+            const initial =
+                name.charAt(0).toUpperCase();
+
+            document.getElementById("profileName").textContent = name;
+            document.getElementById("profileEmail").textContent = email;
+
+            document.getElementById("settingsName").textContent = name;
+            document.getElementById("settingsEmail").textContent = email;
+
+            document.getElementById("userAvatar").textContent = initial;
+            document.getElementById("settingsAvatar").textContent = initial;
+        }
+
+
+        function logout() {
+
+            localStorage.removeItem("studyxUser");
+            localStorage.removeItem("studyxChatHistory");
+
+            window.location.href = "login.html";
+        }
+
+
+        document
+            .getElementById("logoutBtn")
+            .addEventListener("click", logout);
+
+
+        document
+            .getElementById("logoutBtn2")
+            .addEventListener("click", logout);
+
+    </script>
+
+</body>
+
+</html>

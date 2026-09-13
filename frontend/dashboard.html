@@ -1,0 +1,1644 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | StudyX</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body class="dashboard-page">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="sidebar">
+
+        <a href="index.html" class="logo">
+
+            <span class="logo-icon">✦</span>
+
+            <span>
+                Study<span>X</span>
+            </span>
+
+        </a>
+
+
+        <nav class="sidebar-nav">
+
+            <a href="dashboard.html" class="nav-item active">
+                <span>⌂</span>
+                Dashboard
+            </a>
+
+
+            <a href="ai-tutor.html" class="nav-item">
+                <span>🤖</span>
+                AI Tutor
+            </a>
+
+
+            <a href="study-materials.html" class="nav-item">
+                <span>📚</span>
+                Study Materials
+            </a>
+
+
+            <a href="quiz.html" class="nav-item">
+                <span>📝</span>
+                Quiz Generator
+            </a>
+
+
+            <a href="study-planner.html" class="nav-item">
+                <span>📅</span>
+                Study Planner
+            </a>
+
+
+            <a href="#progressSection" class="nav-item">
+                <span>📊</span>
+                Progress
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+<a href="settings.html"
+   class="nav-item"
+   onclick="window.location.href='settings.html'; return false;">
+    <span>⚙</span>
+    Settings
+</a>
+
+
+            <button id="logoutBtn" class="logout-btn">
+
+                <span>↪</span>
+
+                Logout
+
+            </button>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="dashboard-main">
+
+
+        <!-- =================================================
+             HEADER
+        ================================================== -->
+
+        <header class="dashboard-header">
+
+            <div>
+
+                <span class="section-label">
+                    STUDYX DASHBOARD
+                </span>
+
+
+                <h1>
+
+                    Welcome back,
+                    <span id="userName">Student</span> 👋
+
+                </h1>
+
+
+                <p>
+                    Continue your learning journey and stay on track.
+                </p>
+
+            </div>
+
+
+            <div class="user-profile">
+
+                <div
+                    class="profile-avatar"
+                    id="userAvatar">
+
+                    S
+
+                </div>
+
+
+                <div>
+
+                    <strong id="profileName">
+                        Student
+                    </strong>
+
+
+                    <small id="profileEmail">
+                        student@example.com
+                    </small>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =================================================
+             QUICK STATS
+        ================================================== -->
+
+        <section class="stats-grid">
+
+
+            <!-- MATERIALS -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    📚
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Study Materials
+                    </span>
+
+
+                    <strong id="materialsCount">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- QUIZZES -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    📝
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Quizzes Completed
+                    </span>
+
+
+                    <strong id="quizCount">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- STREAK -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    🔥
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Study Streak
+                    </span>
+
+
+                    <strong id="streakCount">
+                        0 days
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- PROGRESS -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    🎯
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Average Progress
+                    </span>
+
+
+                    <strong id="progressCount">
+                        0%
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             QUIZ PERFORMANCE
+        ================================================== -->
+
+        <section
+            class="dashboard-section"
+            id="progressSection">
+
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        PERFORMANCE
+                    </span>
+
+
+                    <h2>
+                        Your Learning Progress
+                    </h2>
+
+
+                    <p>
+                        Track your quiz performance and learning progress.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="ai-card">
+
+
+                <div class="ai-card-icon">
+                    📊
+                </div>
+
+
+                <div style="width:100%;">
+
+                    <h3>
+                        Overall Performance
+                    </h3>
+
+
+                    <p id="performanceText">
+                        Complete a quiz to start tracking your performance.
+                    </p>
+
+
+                    <div
+                        style="
+                        width:100%;
+                        height:10px;
+                        background:rgba(255,255,255,0.08);
+                        border-radius:20px;
+                        margin-top:18px;
+                        overflow:hidden;
+                        ">
+
+                        <div
+                            id="progressBar"
+                            style="
+                            width:0%;
+                            height:100%;
+                            border-radius:20px;
+                            background:linear-gradient(90deg,#7c5cff,#9b7cff);
+                            transition:width .5s ease;
+                            ">
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             STUDY PLANNER PROGRESS
+        ================================================== -->
+
+        <section class="dashboard-section">
+
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        STUDY PLANNER
+                    </span>
+
+
+                    <h2>
+                        Your Study Plan Progress
+                    </h2>
+
+
+                    <p>
+                        Track your completed and pending study tasks.
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="btn btn-primary"
+                    onclick="window.location.href='study-planner.html'">
+
+                    View Study Plan →
+
+                </button>
+
+            </div>
+
+
+
+            <div class="ai-card">
+
+                <div class="ai-card-icon">
+                    📅
+                </div>
+
+
+                <div style="width:100%;">
+
+                    <h3>
+
+                        <span id="plannerProgressPercent">
+                            0%
+                        </span>
+
+                        Completed
+
+                    </h3>
+
+
+                    <p id="plannerProgressText">
+                        No study plan available yet.
+                    </p>
+
+
+                    <!-- PLANNER PROGRESS BAR -->
+
+                    <div
+                        style="
+                        width:100%;
+                        height:10px;
+                        background:rgba(255,255,255,0.08);
+                        border-radius:20px;
+                        margin-top:18px;
+                        overflow:hidden;
+                        ">
+
+                        <div
+                            id="plannerProgressBar"
+                            style="
+                            width:0%;
+                            height:100%;
+                            border-radius:20px;
+                            background:linear-gradient(90deg,#7c5cff,#9b7cff);
+                            transition:width .5s ease;
+                            ">
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- PLANNER STATS -->
+
+                    <div
+                        style="
+                        display:grid;
+                        grid-template-columns:repeat(3,1fr);
+                        gap:15px;
+                        margin-top:22px;
+                        ">
+
+
+                        <div>
+
+                            <small style="opacity:.6;">
+                                Total Tasks
+                            </small>
+
+
+                            <strong
+                                id="plannerTotalTasks"
+                                style="
+                                display:block;
+                                font-size:22px;
+                                margin-top:5px;
+                                ">
+
+                                0
+
+                            </strong>
+
+                        </div>
+
+
+
+                        <div>
+
+                            <small style="opacity:.6;">
+                                Completed
+                            </small>
+
+
+                            <strong
+                                id="plannerCompletedTasks"
+                                style="
+                                display:block;
+                                font-size:22px;
+                                margin-top:5px;
+                                ">
+
+                                0
+
+                            </strong>
+
+                        </div>
+
+
+
+                        <div>
+
+                            <small style="opacity:.6;">
+                                Pending
+                            </small>
+
+
+                            <strong
+                                id="plannerPendingTasks"
+                                style="
+                                display:block;
+                                font-size:22px;
+                                margin-top:5px;
+                                ">
+
+                                0
+
+                            </strong>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             AI TUTOR
+        ================================================== -->
+
+        <section class="dashboard-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        AI LEARNING
+                    </span>
+
+
+                    <h2>
+                        Your AI Study Assistant
+                    </h2>
+
+
+                    <p>
+                        Ask questions, understand concepts and learn smarter.
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="btn btn-primary"
+                    onclick="window.location.href='ai-tutor.html'">
+
+                    Open AI Tutor →
+
+                </button>
+
+            </div>
+
+
+
+            <div class="ai-card">
+
+                <div class="ai-card-icon">
+                    ✦
+                </div>
+
+
+                <div>
+
+                    <h3>
+                        What do you want to learn today?
+                    </h3>
+
+
+                    <p>
+                        StudyX AI can explain difficult topics,
+                        summarize notes and help you prepare for exams.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             QUICK ACTIONS
+        ================================================== -->
+
+        <section class="dashboard-section">
+
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        QUICK ACTIONS
+                    </span>
+
+
+                    <h2>
+                        Start Learning
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="action-grid">
+
+
+                <!-- UPLOAD -->
+
+                <div class="action-card">
+
+                    <div class="action-icon">
+                        📚
+                    </div>
+
+
+                    <h3>
+                        Upload Notes
+                    </h3>
+
+
+                    <p>
+                        Upload PDFs and study materials.
+                    </p>
+
+
+                    <button
+                        onclick="window.location.href='study-materials.html'">
+
+                        Upload →
+
+                    </button>
+
+                </div>
+
+
+
+                <!-- QUIZ -->
+
+                <div class="action-card">
+
+                    <div class="action-icon">
+                        📝
+                    </div>
+
+
+                    <h3>
+                        Generate Quiz
+                    </h3>
+
+
+                    <p>
+                        Create an AI-powered quiz from your notes.
+                    </p>
+
+
+                    <button
+                        onclick="window.location.href='quiz.html'">
+
+                        Create Quiz →
+
+                    </button>
+
+                </div>
+
+
+
+                <!-- PLANNER -->
+
+                <div class="action-card">
+
+                    <div class="action-icon">
+                        📅
+                    </div>
+
+
+                    <h3>
+                        Study Planner
+                    </h3>
+
+
+                    <p>
+                        Build a personalized study schedule.
+                    </p>
+
+
+                    <button
+                        onclick="window.location.href='study-planner.html'">
+
+                        Plan Study →
+
+                    </button>
+
+                </div>
+
+
+
+                <!-- REVISION -->
+
+                <div class="action-card">
+
+                    <div class="action-icon">
+                        🔄
+                    </div>
+
+
+                    <h3>
+                        Smart Revision
+                    </h3>
+
+
+                    <p>
+                        Revise topics based on your progress.
+                    </p>
+
+
+                    <button
+                        onclick="window.location.href='quiz.html'">
+
+                        Start Revision →
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             RECENT ACTIVITY
+        ================================================== -->
+
+        <section class="dashboard-section">
+
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        ACTIVITY
+                    </span>
+
+
+                    <h2>
+                        Recent Activity
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+
+            <div
+                id="activityContainer"
+                class="empty-activity">
+
+                <div class="empty-icon">
+                    ✦
+                </div>
+
+
+                <h3>
+                    No activity yet
+                </h3>
+
+
+                <p>
+                    Complete a quiz to see your learning activity here.
+                </p>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script>
+
+        const API_URL =
+            "http://127.0.0.1:8000";
+
+
+
+        // =================================================
+        // GET USER
+        // =================================================
+
+        const storedUser =
+            localStorage.getItem("studyxUser");
+
+
+        if (!storedUser) {
+
+            window.location.href =
+                "login.html";
+
+        }
+
+
+        const user =
+            JSON.parse(storedUser);
+
+
+
+        // =================================================
+        // USER INFORMATION
+        // =================================================
+
+        document.getElementById("userName")
+            .textContent =
+            user.name || "Student";
+
+
+        document.getElementById("profileName")
+            .textContent =
+            user.name || "Student";
+
+
+        document.getElementById("profileEmail")
+            .textContent =
+            user.email || "";
+
+
+        document.getElementById("userAvatar")
+            .textContent =
+            (user.name || "S")
+                .charAt(0)
+                .toUpperCase();
+
+
+
+        // =================================================
+        // LOAD DASHBOARD DATA
+        // =================================================
+
+        async function loadDashboard() {
+
+            try {
+
+
+                // -----------------------------------------
+                // LOAD MATERIALS
+                // -----------------------------------------
+
+                const materialsResponse =
+                    await fetch(
+                        `${API_URL}/materials?email=${encodeURIComponent(user.email)}`
+                    );
+
+
+                let materials = [];
+
+
+                if (materialsResponse.ok) {
+
+                    const materialData =
+                        await materialsResponse.json();
+
+                    materials =
+                        materialData.materials || [];
+
+                }
+
+
+                document.getElementById(
+                    "materialsCount"
+                ).textContent =
+                    materials.length;
+
+
+
+                // -----------------------------------------
+                // LOAD QUIZ PROGRESS
+                // -----------------------------------------
+
+                const progressResponse =
+                    await fetch(
+                        `${API_URL}/progress?email=${encodeURIComponent(user.email)}`
+                    );
+
+
+                let progress = [];
+
+
+                if (progressResponse.ok) {
+
+                    const progressData =
+                        await progressResponse.json();
+
+                    progress =
+                        progressData.progress || [];
+
+                }
+
+
+
+                // -----------------------------------------
+                // QUIZ COUNT
+                // -----------------------------------------
+
+                document.getElementById(
+                    "quizCount"
+                ).textContent =
+                    progress.length;
+
+
+
+                // -----------------------------------------
+                // AVERAGE PROGRESS
+                // -----------------------------------------
+
+                let average = 0;
+
+
+                if (progress.length > 0) {
+
+                    const totalPercentage =
+                        progress.reduce(
+                            (sum, item) =>
+                                sum +
+                                Number(
+                                    item.percentage || 0
+                                ),
+                            0
+                        );
+
+
+                    average =
+                        Math.round(
+                            totalPercentage /
+                            progress.length
+                        );
+
+                }
+
+
+                document.getElementById(
+                    "progressCount"
+                ).textContent =
+                    `${average}%`;
+
+
+                document.getElementById(
+                    "progressBar"
+                ).style.width =
+                    `${average}%`;
+
+
+
+                // -----------------------------------------
+                // PERFORMANCE MESSAGE
+                // -----------------------------------------
+
+                const performanceText =
+                    document.getElementById(
+                        "performanceText"
+                    );
+
+
+                if (progress.length === 0) {
+
+                    performanceText.textContent =
+                        "Complete your first quiz to start tracking your performance.";
+
+                } else if (average >= 80) {
+
+                    performanceText.textContent =
+                        `Excellent performance! Your average quiz accuracy is ${average}%. Keep it up! 🚀`;
+
+                } else if (average >= 60) {
+
+                    performanceText.textContent =
+                        `Good progress! Your average quiz accuracy is ${average}%. Keep practicing to improve. 💪`;
+
+                } else {
+
+                    performanceText.textContent =
+                        `Your current average is ${average}%. Review your study materials and keep practicing. 📚`;
+
+                }
+
+
+
+                // -----------------------------------------
+                // STUDY STREAK
+                // -----------------------------------------
+
+                const streak =
+                    calculateStreak(progress);
+
+
+                document.getElementById(
+                    "streakCount"
+                ).textContent =
+                    `${streak} days`;
+
+
+
+                // -----------------------------------------
+                // STUDY PLANNER PROGRESS
+                // -----------------------------------------
+
+                await loadPlannerProgress();
+
+
+
+                // -----------------------------------------
+                // RECENT ACTIVITY
+                // -----------------------------------------
+
+                renderRecentActivity(
+                    progress
+                );
+
+
+            } catch (error) {
+
+                console.error(
+                    "Dashboard loading error:",
+                    error
+                );
+
+            }
+
+        }
+
+
+
+        // =================================================
+        // LOAD STUDY PLANNER PROGRESS
+        // =================================================
+
+        async function loadPlannerProgress() {
+
+            try {
+
+                const plannerResponse =
+                    await fetch(
+                        `${API_URL}/study-plans?email=${encodeURIComponent(user.email)}`
+                    );
+
+
+                if (!plannerResponse.ok) {
+
+                    throw new Error(
+                        "Failed to load study plans"
+                    );
+
+                }
+
+
+                const plannerData =
+                    await plannerResponse.json();
+
+
+                const studyPlans =
+                    plannerData.plans || [];
+
+
+                // No study plan
+
+                if (studyPlans.length === 0) {
+
+                    document.getElementById(
+                        "plannerProgressPercent"
+                    ).textContent =
+                        "0%";
+
+
+                    document.getElementById(
+                        "plannerProgressBar"
+                    ).style.width =
+                        "0%";
+
+
+                    document.getElementById(
+                        "plannerTotalTasks"
+                    ).textContent =
+                        "0";
+
+
+                    document.getElementById(
+                        "plannerCompletedTasks"
+                    ).textContent =
+                        "0";
+
+
+                    document.getElementById(
+                        "plannerPendingTasks"
+                    ).textContent =
+                        "0";
+
+
+                    document.getElementById(
+                        "plannerProgressText"
+                    ).textContent =
+                        "Create a study plan to start tracking your study progress.";
+
+                    return;
+
+                }
+
+
+
+                // Latest plan
+
+                const latestPlan =
+                    studyPlans[0];
+
+
+                const plan =
+                    latestPlan.plan || {};
+
+
+                const days =
+                    plan.days || [];
+
+
+                // -----------------------------------------
+                // COUNT TOTAL TASKS
+                // -----------------------------------------
+
+                let totalTasks = 0;
+
+
+                days.forEach(day => {
+
+                    totalTasks +=
+                        (day.tasks || []).length;
+
+                });
+
+
+
+                // -----------------------------------------
+                // COMPLETED TASKS
+                // -----------------------------------------
+
+                const completedTasks =
+                    latestPlan.completed_tasks || [];
+
+
+                const completedCount =
+                    completedTasks.length;
+
+
+
+                // -----------------------------------------
+                // PENDING TASKS
+                // -----------------------------------------
+
+                const pendingCount =
+                    Math.max(
+                        totalTasks -
+                        completedCount,
+                        0
+                    );
+
+
+
+                // -----------------------------------------
+                // COMPLETION %
+                // -----------------------------------------
+
+                const percentage =
+                    totalTasks > 0
+                        ? Math.round(
+                            (
+                                completedCount /
+                                totalTasks
+                            ) * 100
+                        )
+                        : 0;
+
+
+
+                // -----------------------------------------
+                // UPDATE UI
+                // -----------------------------------------
+
+                document.getElementById(
+                    "plannerProgressPercent"
+                ).textContent =
+                    `${percentage}%`;
+
+
+                document.getElementById(
+                    "plannerProgressBar"
+                ).style.width =
+                    `${percentage}%`;
+
+
+                document.getElementById(
+                    "plannerTotalTasks"
+                ).textContent =
+                    totalTasks;
+
+
+                document.getElementById(
+                    "plannerCompletedTasks"
+                ).textContent =
+                    completedCount;
+
+
+                document.getElementById(
+                    "plannerPendingTasks"
+                ).textContent =
+                    pendingCount;
+
+
+
+                // -----------------------------------------
+                // PROGRESS MESSAGE
+                // -----------------------------------------
+
+                if (percentage === 100) {
+
+                    document.getElementById(
+                        "plannerProgressText"
+                    ).textContent =
+                        "Amazing! You completed your entire study plan. 🎉";
+
+                } else if (percentage >= 75) {
+
+                    document.getElementById(
+                        "plannerProgressText"
+                    ).textContent =
+                        `${completedCount} of ${totalTasks} tasks completed. Almost there! 🚀`;
+
+                } else if (percentage >= 40) {
+
+                    document.getElementById(
+                        "plannerProgressText"
+                    ).textContent =
+                        `${completedCount} of ${totalTasks} tasks completed. Keep going! 💪`;
+
+                } else {
+
+                    document.getElementById(
+                        "plannerProgressText"
+                    ).textContent =
+                        `${completedCount} of ${totalTasks} study tasks completed. Keep building your progress! 📚`;
+
+                }
+
+
+            } catch (error) {
+
+                console.error(
+                    "Planner progress error:",
+                    error
+                );
+
+
+                document.getElementById(
+                    "plannerProgressText"
+                ).textContent =
+                    "Unable to load study planner progress.";
+
+            }
+
+        }
+
+
+
+        // =================================================
+        // CALCULATE STREAK
+        // =================================================
+
+        function calculateStreak(records) {
+
+            if (!records.length) {
+                return 0;
+            }
+
+
+            const dates = [
+                ...new Set(
+                    records
+                        .map(record => {
+
+                            if (!record.created_at) {
+                                return null;
+                            }
+
+                            return new Date(
+                                record.created_at
+                            )
+                                .toISOString()
+                                .split("T")[0];
+
+                        })
+                        .filter(Boolean)
+                )
+            ];
+
+
+            dates.sort(
+                (a, b) =>
+                    new Date(b) -
+                    new Date(a)
+            );
+
+
+            if (dates.length === 0) {
+                return 0;
+            }
+
+
+            let streak = 1;
+
+
+            for (
+                let i = 1;
+                i < dates.length;
+                i++
+            ) {
+
+                const previous =
+                    new Date(
+                        dates[i - 1]
+                    );
+
+
+                const current =
+                    new Date(
+                        dates[i]
+                    );
+
+
+                const difference =
+                    (
+                        previous -
+                        current
+                    ) /
+                    (
+                        1000 *
+                        60 *
+                        60 *
+                        24
+                    );
+
+
+                if (difference === 1) {
+
+                    streak++;
+
+                } else {
+
+                    break;
+
+                }
+
+            }
+
+
+            return streak;
+
+        }
+
+
+
+        // =================================================
+        // RECENT ACTIVITY
+        // =================================================
+
+        function renderRecentActivity(
+            records
+        ) {
+
+            const container =
+                document.getElementById(
+                    "activityContainer"
+                );
+
+
+            if (!records.length) {
+
+                container.className =
+                    "empty-activity";
+
+
+                container.innerHTML = `
+
+                    <div class="empty-icon">
+                        ✦
+                    </div>
+
+                    <h3>
+                        No activity yet
+                    </h3>
+
+                    <p>
+                        Complete a quiz to see your learning activity here.
+                    </p>
+
+                `;
+
+                return;
+
+            }
+
+
+            const recent =
+                records.slice(0, 5);
+
+
+            container.className =
+                "activity-list";
+
+
+            container.innerHTML =
+                recent.map(record => {
+
+                    const percentage =
+                        Number(
+                            record.percentage || 0
+                        );
+
+
+                    let icon = "📝";
+
+
+                    if (percentage >= 80) {
+
+                        icon = "🏆";
+
+                    } else if (percentage >= 60) {
+
+                        icon = "📈";
+
+                    } else {
+
+                        icon = "📚";
+
+                    }
+
+
+                    const date =
+                        record.created_at
+                            ? new Date(
+                                record.created_at
+                            ).toLocaleDateString(
+                                "en-IN",
+                                {
+                                    day: "2-digit",
+                                    month: "short",
+                                    year: "numeric"
+                                }
+                            )
+                            : "Recently";
+
+
+                    return `
+
+                        <div
+                            class="activity-item"
+                            style="
+                            display:flex;
+                            align-items:center;
+                            justify-content:space-between;
+                            gap:20px;
+                            padding:18px 20px;
+                            margin-bottom:12px;
+                            border:1px solid rgba(255,255,255,0.08);
+                            border-radius:14px;
+                            background:rgba(255,255,255,0.02);
+                            "
+                        >
+
+                            <div
+                                style="
+                                display:flex;
+                                align-items:center;
+                                gap:15px;
+                                "
+                            >
+
+                                <div
+                                    style="
+                                    font-size:24px;
+                                    "
+                                >
+                                    ${icon}
+                                </div>
+
+
+                                <div>
+
+                                    <strong>
+                                        Quiz Completed
+                                    </strong>
+
+
+                                    <p
+                                        style="
+                                        margin:4px 0 0;
+                                        opacity:.65;
+                                        "
+                                    >
+
+                                        ${escapeHTML(
+                                            record.filename ||
+                                            "Study Material"
+                                        )}
+
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+                            <div
+                                style="
+                                text-align:right;
+                                "
+                            >
+
+                                <strong>
+                                    ${percentage}%
+                                </strong>
+
+
+                                <small
+                                    style="
+                                    display:block;
+                                    opacity:.55;
+                                    margin-top:4px;
+                                    "
+                                >
+                                    ${date}
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                    `;
+
+                }).join("");
+
+        }
+
+
+
+        // =================================================
+        // HTML ESCAPE
+        // =================================================
+
+        function escapeHTML(text) {
+
+            const div =
+                document.createElement("div");
+
+
+            div.textContent =
+                text;
+
+
+            return div.innerHTML;
+
+        }
+
+
+
+        // =================================================
+        // LOGOUT
+        // =================================================
+
+        document.getElementById(
+            "logoutBtn"
+        )
+        .addEventListener(
+            "click",
+            function () {
+
+                localStorage.removeItem(
+                    "studyxUser"
+                );
+
+
+                window.location.href =
+                    "login.html";
+
+            }
+        );
+
+
+
+        // =================================================
+        // START
+        // =================================================
+
+        loadDashboard();
+
+    </script>
+
+
+</body>
+
+</html>

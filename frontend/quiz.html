@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Generator - StudyX</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="dashboard-layout">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+
+            <div class="sidebar-logo">
+                <div class="logo-icon">S</div>
+                <div>
+                    <h2>StudyX</h2>
+                    <span>AI Study Assistant</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+
+                <a href="dashboard.html">
+                    <span>⌂</span>
+                    Dashboard
+                </a>
+
+                <a href="ai-tutor.html">
+                    <span>✦</span>
+                    AI Tutor
+                </a>
+
+                <a href="study-materials.html">
+                    <span>▣</span>
+                    Study Materials
+                </a>
+
+                <a href="quiz.html" class="active">
+                    <span>✓</span>
+                    Quiz Generator
+                </a>
+
+                <a href="study-planner.html">
+                    <span>◷</span>
+                    Study Planner
+                </a>
+
+                <a href="progress.html">
+                    <span>📊</span>
+                    Progress
+                </a>
+
+            </nav>
+
+            <div class="sidebar-bottom">
+
+                <div class="sidebar-user">
+                    <div class="user-avatar" id="userAvatar">D</div>
+
+                    <div>
+                        <strong id="userName">Student</strong>
+                        <small id="userEmail">student@email.com</small>
+                    </div>
+                </div>
+
+                <button class="logout-btn" id="logoutBtn">
+                    Logout
+                </button>
+
+            </div>
+
+        </aside>
+
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+
+            <header class="dashboard-header">
+
+                <div>
+                    <h1>Quiz Generator</h1>
+                    <p>Generate AI-powered quizzes from your study materials.</p>
+                </div>
+
+            </header>
+
+
+            <!-- Quiz Setup -->
+            <section class="quiz-setup" id="quizSetup">
+
+                <div class="section-title">
+                    <h2>Create a Quiz</h2>
+                    <p>Choose your material and quiz difficulty.</p>
+                </div>
+
+
+                <div class="quiz-form-grid">
+
+                    <div class="form-group">
+
+                        <label for="materialSelect">
+                            Study Material
+                        </label>
+
+                        <select id="materialSelect">
+                            <option value="">Select a material</option>
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="questionCount">
+                            Number of Questions
+                        </label>
+
+                        <select id="questionCount">
+
+                            <option value="5">5 Questions</option>
+                            <option value="10">10 Questions</option>
+                            <option value="15">15 Questions</option>
+                            <option value="20">20 Questions</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="difficulty">
+                            Difficulty
+                        </label>
+
+                        <select id="difficulty">
+
+                            <option value="easy">Easy</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="hard">Hard</option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <button class="generate-quiz-btn" id="generateQuizBtn">
+                    ✦ Generate Quiz
+                </button>
+
+                <p class="quiz-status" id="quizStatus"></p>
+
+            </section>
+
+
+            <!-- Loading -->
+            <section class="quiz-loading" id="quizLoading" style="display:none;">
+
+                <div class="loading-spinner"></div>
+
+                <h2>Generating your quiz...</h2>
+
+                <p>
+                    StudyX AI is creating questions from your study material.
+                </p>
+
+            </section>
+
+
+            <!-- Quiz -->
+            <section class="quiz-container" id="quizContainer" style="display:none;">
+
+                <div class="quiz-top">
+
+                    <div>
+                        <span class="quiz-label">AI GENERATED QUIZ</span>
+                        <h2 id="quizTitle">Study Quiz</h2>
+                    </div>
+
+                    <div class="quiz-progress">
+                        <span id="questionProgress">Question 1</span>
+                    </div>
+
+                </div>
+
+
+                <div id="questionsContainer"></div>
+
+
+                <div class="quiz-actions">
+
+                    <button class="secondary-btn" id="restartQuizBtn">
+                        ← New Quiz
+                    </button>
+
+                    <button class="submit-quiz-btn" id="submitQuizBtn">
+                        Submit Quiz →
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- Result -->
+            <section class="quiz-result" id="quizResult" style="display:none;">
+
+                <div class="result-icon">
+                    ✓
+                </div>
+
+                <span class="quiz-label">QUIZ COMPLETED</span>
+
+                <h2>Your Quiz Result</h2>
+
+                <div class="score-box">
+
+                    <div>
+                        <strong id="scoreValue">0/5</strong>
+                        <span>Score</span>
+                    </div>
+
+                    <div>
+                        <strong id="percentageValue">0%</strong>
+                        <span>Accuracy</span>
+                    </div>
+
+                </div>
+
+                <p id="resultMessage">
+                    Great work! Keep practicing.
+                </p>
+
+                <button class="generate-quiz-btn" id="tryAgainBtn">
+                    Try Another Quiz
+                </button>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <script src="quiz.js"></script>
+
+</body>
+</html>

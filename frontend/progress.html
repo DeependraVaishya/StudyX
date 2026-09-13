@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Progress | StudyX</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        .progress-cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 35px;
+        }
+
+        .progress-card {
+            padding: 24px;
+            border: 1px solid rgba(255,255,255,.08);
+            border-radius: 18px;
+            background: rgba(255,255,255,.025);
+        }
+
+        .progress-card span {
+            display: block;
+            opacity: .6;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .progress-card strong {
+            font-size: 30px;
+        }
+
+        .progress-icon {
+            font-size: 25px;
+            margin-bottom: 15px;
+        }
+
+        .performance-box {
+            padding: 28px;
+            border: 1px solid rgba(255,255,255,.08);
+            border-radius: 20px;
+            background: rgba(255,255,255,.025);
+            margin-bottom: 35px;
+        }
+
+        .performance-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+
+        .performance-header strong {
+            font-size: 26px;
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 12px;
+            background: rgba(255,255,255,.08);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            width: 0%;
+            height: 100%;
+            border-radius: 20px;
+            background: linear-gradient(90deg,#7c5cff,#9b7cff);
+            transition: width .6s ease;
+        }
+
+        .history-box {
+            border: 1px solid rgba(255,255,255,.08);
+            border-radius: 20px;
+            background: rgba(255,255,255,.025);
+            overflow: hidden;
+        }
+
+        .history-header {
+            padding: 22px 25px;
+            border-bottom: 1px solid rgba(255,255,255,.08);
+        }
+
+        .history-header h2 {
+            margin: 0;
+        }
+
+        .history-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 25px;
+            border-bottom: 1px solid rgba(255,255,255,.06);
+        }
+
+        .history-item:last-child {
+            border-bottom: none;
+        }
+
+        .history-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .history-icon {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            background: rgba(124,92,255,.12);
+            font-size: 20px;
+        }
+
+        .history-left strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .history-left small {
+            opacity: .55;
+        }
+
+        .history-score {
+            text-align: right;
+        }
+
+        .history-score strong {
+            font-size: 22px;
+        }
+
+        .history-score small {
+            display: block;
+            opacity: .5;
+            margin-top: 4px;
+        }
+
+        .empty-progress {
+            text-align: center;
+            padding: 60px 20px;
+            opacity: .7;
+        }
+
+        .empty-progress .empty-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        @media(max-width:900px) {
+
+            .progress-cards {
+                grid-template-columns: repeat(2,1fr);
+            }
+
+        }
+
+        @media(max-width:600px) {
+
+            .progress-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .history-item {
+                gap: 15px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body class="dashboard-page">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="sidebar">
+
+        <a href="index.html" class="logo">
+            <span class="logo-icon">✦</span>
+            <span>Study<span>X</span></span>
+        </a>
+
+
+        <nav class="sidebar-nav">
+
+            <a href="dashboard.html" class="nav-item">
+                <span>⌂</span>
+                Dashboard
+            </a>
+
+            <a href="ai-tutor.html" class="nav-item">
+                <span>🤖</span>
+                AI Tutor
+            </a>
+
+            <a href="study-materials.html" class="nav-item">
+                <span>📚</span>
+                Study Materials
+            </a>
+
+            <a href="quiz.html" class="nav-item">
+                <span>📝</span>
+                Quiz Generator
+            </a>
+
+            <a href="study-planner.html" class="nav-item">
+                <span>📅</span>
+                Study Planner
+            </a>
+
+            <a href="progress.html" class="nav-item active">
+                <span>📊</span>
+                Progress
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <a href="#" class="nav-item">
+                <span>⚙</span>
+                Settings
+            </a>
+
+            <button
+                id="logoutBtn"
+                class="logout-btn">
+
+                <span>↪</span>
+                Logout
+
+            </button>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="dashboard-main">
+
+
+        <!-- HEADER -->
+
+        <header class="dashboard-header">
+
+            <div>
+
+                <span class="section-label">
+                    STUDYX ANALYTICS
+                </span>
+
+                <h1>
+                    Your Progress 📊
+                </h1>
+
+                <p>
+                    Track your learning performance and quiz history.
+                </p>
+
+            </div>
+
+
+            <div class="user-profile">
+
+                <div
+                    class="profile-avatar"
+                    id="userAvatar">
+
+                    S
+
+                </div>
+
+
+                <div>
+
+                    <strong id="profileName">
+                        Student
+                    </strong>
+
+                    <small id="profileEmail">
+                        student@example.com
+                    </small>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =================================================
+             STAT CARDS
+        ================================================== -->
+
+        <section class="progress-cards">
+
+
+            <div class="progress-card">
+
+                <div class="progress-icon">
+                    📝
+                </div>
+
+                <span>
+                    Total Quizzes
+                </span>
+
+                <strong id="totalQuizzes">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="progress-card">
+
+                <div class="progress-icon">
+                    🎯
+                </div>
+
+                <span>
+                    Average Accuracy
+                </span>
+
+                <strong id="averageAccuracy">
+                    0%
+                </strong>
+
+            </div>
+
+
+            <div class="progress-card">
+
+                <div class="progress-icon">
+                    ❓
+                </div>
+
+                <span>
+                    Questions Solved
+                </span>
+
+                <strong id="questionsSolved">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="progress-card">
+
+                <div class="progress-icon">
+                    ✅
+                </div>
+
+                <span>
+                    Correct Answers
+                </span>
+
+                <strong id="correctAnswers">
+                    0
+                </strong>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             OVERALL PERFORMANCE
+        ================================================== -->
+
+        <section class="performance-box">
+
+            <div class="performance-header">
+
+                <div>
+
+                    <span class="section-label">
+                        OVERALL PERFORMANCE
+                    </span>
+
+                    <h2>
+                        Average Quiz Accuracy
+                    </h2>
+
+                </div>
+
+
+                <strong id="performancePercentage">
+                    0%
+                </strong>
+
+            </div>
+
+
+            <div class="progress-track">
+
+                <div
+                    class="progress-fill"
+                    id="performanceBar">
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             QUIZ HISTORY
+        ================================================== -->
+
+        <section class="history-box">
+
+            <div class="history-header">
+
+                <span class="section-label">
+                    QUIZ HISTORY
+                </span>
+
+                <h2>
+                    Recent Attempts
+                </h2>
+
+            </div>
+
+
+            <div id="historyContainer">
+
+                <div class="empty-progress">
+
+                    <div class="empty-icon">
+                        📊
+                    </div>
+
+                    <h3>
+                        No quiz attempts yet
+                    </h3>
+
+                    <p>
+                        Complete a quiz to see your performance here.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script>
+
+        const API_URL =
+            "http://127.0.0.1:8000";
+
+
+        // =================================================
+        // USER
+        // =================================================
+
+        const storedUser =
+            localStorage.getItem("studyxUser");
+
+
+        if (!storedUser) {
+
+            window.location.href =
+                "login.html";
+
+        }
+
+
+        const user =
+            JSON.parse(storedUser);
+
+
+        document.getElementById(
+            "profileName"
+        ).textContent =
+            user.name || "Student";
+
+
+        document.getElementById(
+            "profileEmail"
+        ).textContent =
+            user.email || "";
+
+
+        document.getElementById(
+            "userAvatar"
+        ).textContent =
+            (user.name || "S")
+                .charAt(0)
+                .toUpperCase();
+
+
+
+        // =================================================
+        // LOAD PROGRESS
+        // =================================================
+
+        async function loadProgress() {
+
+            try {
+
+                const response =
+                    await fetch(
+                        `${API_URL}/progress?email=${encodeURIComponent(user.email)}`
+                    );
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Failed to load progress"
+                    );
+
+                }
+
+
+                const data =
+                    await response.json();
+
+
+                const records =
+                    data.progress || [];
+
+
+                calculateStats(records);
+
+                renderHistory(records);
+
+
+            } catch (error) {
+
+                console.error(
+                    "Progress error:",
+                    error
+                );
+
+            }
+
+        }
+
+
+
+        // =================================================
+        // CALCULATE STATISTICS
+        // =================================================
+
+        function calculateStats(records) {
+
+            const totalQuizzes =
+                records.length;
+
+
+            let totalQuestions = 0;
+
+            let totalCorrect = 0;
+
+            let totalPercentage = 0;
+
+
+            records.forEach(record => {
+
+                totalQuestions +=
+                    Number(
+                        record.total_questions || 0
+                    );
+
+
+                totalCorrect +=
+                    Number(
+                        record.correct_answers || 0
+                    );
+
+
+                totalPercentage +=
+                    Number(
+                        record.percentage || 0
+                    );
+
+            });
+
+
+            let average =
+                0;
+
+
+            if (totalQuizzes > 0) {
+
+                average =
+                    Math.round(
+                        totalPercentage /
+                        totalQuizzes
+                    );
+
+            }
+
+
+            document.getElementById(
+                "totalQuizzes"
+            ).textContent =
+                totalQuizzes;
+
+
+            document.getElementById(
+                "averageAccuracy"
+            ).textContent =
+                `${average}%`;
+
+
+            document.getElementById(
+                "questionsSolved"
+            ).textContent =
+                totalQuestions;
+
+
+            document.getElementById(
+                "correctAnswers"
+            ).textContent =
+                totalCorrect;
+
+
+            document.getElementById(
+                "performancePercentage"
+            ).textContent =
+                `${average}%`;
+
+
+            document.getElementById(
+                "performanceBar"
+            ).style.width =
+                `${average}%`;
+
+        }
+
+
+
+        // =================================================
+        // RENDER HISTORY
+        // =================================================
+
+        function renderHistory(records) {
+
+            const container =
+                document.getElementById(
+                    "historyContainer"
+                );
+
+
+            if (!records.length) {
+
+                container.innerHTML = `
+
+                    <div class="empty-progress">
+
+                        <div class="empty-icon">
+                            📊
+                        </div>
+
+                        <h3>
+                            No quiz attempts yet
+                        </h3>
+
+                        <p>
+                            Complete a quiz to see your performance here.
+                        </p>
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+            const recent =
+                records.slice(0, 10);
+
+
+            container.innerHTML =
+                recent.map(record => {
+
+                    const percentage =
+                        Number(
+                            record.percentage || 0
+                        );
+
+
+                    const score =
+                        Number(
+                            record.correct_answers || 0
+                        );
+
+
+                    const total =
+                        Number(
+                            record.total_questions || 0
+                        );
+
+
+                    let icon =
+                        "📚";
+
+
+                    if (percentage >= 80) {
+
+                        icon = "🏆";
+
+                    } else if (percentage >= 60) {
+
+                        icon = "📈";
+
+                    }
+
+
+                    const date =
+                        record.created_at
+                            ? new Date(
+                                record.created_at
+                            ).toLocaleDateString(
+                                "en-IN",
+                                {
+                                    day: "2-digit",
+                                    month: "short",
+                                    year: "numeric"
+                                }
+                            )
+                            : "Recently";
+
+
+                    return `
+
+                        <div class="history-item">
+
+                            <div class="history-left">
+
+                                <div class="history-icon">
+                                    ${icon}
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        ${escapeHTML(
+                                            record.filename ||
+                                            "Study Material"
+                                        )}
+                                    </strong>
+
+                                    <small>
+                                        ${capitalize(
+                                            record.difficulty ||
+                                            "medium"
+                                        )} • ${date}
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="history-score">
+
+                                <strong>
+                                    ${score}/${total}
+                                </strong>
+
+                                <small>
+                                    ${percentage}% accuracy
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                    `;
+
+                }).join("");
+
+        }
+
+
+
+        // =================================================
+        // HELPERS
+        // =================================================
+
+        function capitalize(text) {
+
+            return text.charAt(0).toUpperCase() +
+                text.slice(1);
+
+        }
+
+
+        function escapeHTML(text) {
+
+            const div =
+                document.createElement("div");
+
+            div.textContent =
+                text;
+
+            return div.innerHTML;
+
+        }
+
+
+
+        // =================================================
+        // LOGOUT
+        // =================================================
+
+        document.getElementById(
+            "logoutBtn"
+        )
+        .addEventListener(
+            "click",
+            function () {
+
+                localStorage.removeItem(
+                    "studyxUser"
+                );
+
+                window.location.href =
+                    "login.html";
+
+            }
+        );
+
+
+
+        // =================================================
+        // START
+        // =================================================
+
+        loadProgress();
+
+    </script>
+
+</body>
+
+</html>
